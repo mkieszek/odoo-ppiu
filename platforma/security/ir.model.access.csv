@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ppiu_sale_points_read,ppiu.sale.points.read,model_ppiu_sale_points,group_ppiu_sale_points_read,1,0,0,0
+access_ppiu_sale_points_write,ppiu.sale.points.write,model_ppiu_sale_points,group_ppiu_sale_points_write,0,1,0,0
+access_ppiu_sale_points_create,ppiu.sale.points.create,model_ppiu_sale_points,group_ppiu_sale_points_create,0,0,1,0
+access_ppiu_sale_points_unlink,ppiu.sale.points.unlink,model_ppiu_sale_points,group_ppiu_sale_points_unlink,0,0,0,1

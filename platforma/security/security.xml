@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Dodanie kategorii uprawnień -->
+        <record model="ir.module.category" id="module_category_ppiu_access">
+            <field name="name">Platforma produktów i usług - uprawnienia</field>
+            <field name="sequence">9</field>
+        </record> 
+    <!-- Dodanie kategorii uprawnień -->
+        <record model="ir.module.category" id="module_category_ppiu">
+            <field name="name">Platforma produktów i usług</field>
+            <field name="sequence">10</field>
+        </record> 
+        
+    <!-- Dodanie grupy -->
+        <record id="group_ppiu_administration" model="res.groups">
+            <field name="name">Administracja</field>
+            <field name="comment">Administracja</field>
+            <field name="category_id" ref="module_category_ppiu_access"/>
+        </record>
+        
+        <record id="group_ppiu_partner" model="res.groups">
+            <field name="name">Partner</field>
+            <field name="comment">Partner</field>
+            <field name="category_id" ref="module_category_ppiu_access"/>
+        </record>
+    
+	<!-- Dodanie roli -->
+		<!-- Res Partner -->
+        <record id="group_ppiu_res_partner_read" model="res.groups">
+            <field name="name">Res Partner Read</field>
+            <field name="comment">Res Partner Read</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+        </record>
+        <record id="group_ppiu_res_partner_read_partner" model="res.groups">
+            <field name="name">Res Partner Read Partner</field>
+            <field name="comment">Res Partner Read Partner</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_res_partner_read'))]"/>
+        </record>
+        <record id="group_ppiu_res_partner_write" model="res.groups">
+            <field name="name">Res Partner Write</field>
+            <field name="comment">Res Partner Write</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_res_partner_read'))]"/>
+        </record>
+        <record id="group_ppiu_res_partner_create" model="res.groups">
+            <field name="name">Res Partner Create</field>
+            <field name="comment">Res Partner Create</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_res_partner_write'))]"/>
+        </record>
+        <record id="group_ppiu_res_partner_unlink" model="res.groups">
+            <field name="name">Res Partner Unlink</field>
+            <field name="comment">Res Partner Unlink</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_res_partner_write'))]"/>
+        </record>
+        <!-- Poziomy prowizji -->
+        <record id="group_ppiu_sale_points_read" model="res.groups">
+            <field name="name">Sale points Read</field>
+            <field name="comment">Sale points Read</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+        </record>
+        <record id="group_ppiu_sale_points_read_partner" model="res.groups">
+            <field name="name">Sale points Read Partner</field>
+            <field name="comment">Sale points Read Partner</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_points_read'))]"/>
+        </record>
+        <record id="group_ppiu_sale_points_write" model="res.groups">
+            <field name="name">Sale points Write</field>
+            <field name="comment">Sale points Write</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_points_read'))]"/>
+        </record>
+        <record id="group_ppiu_sale_points_create" model="res.groups">
+            <field name="name">Sale points Create</field>
+            <field name="comment">Sale points Create</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_points_write'))]"/>
+        </record>
+        <record id="group_ppiu_sale_points_unlink" model="res.groups">
+            <field name="name">Sale points Unlink</field>
+            <field name="comment">Sale points Unlink</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_points_write'))]"/>
+        </record>
+        
+    	<!-- Dodatkowe -->
+    	<!-- 
+   		<record id="ppiu_partner_read_partner" model="ir.rule">
+            <field name="name">Rule Partner - Partner</field>
+            <field ref="model_res_partner" name="model_id"/>
+            <field name="domain_force">[]</field>
+            <field name="groups" eval="[(4, ref('group_ppiu_res_partner_read_partner'))]"/>
+        </record>
+         -->
+    </data>
+</openerp>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_ppiu_product_form" model="ir.ui.view">
+			<field name="name">ppiu.product.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/>
+			<field name="type">form</field>
+            <field eval="5" name="priority"/>
+			<field name="arch" type="xml">
+		        <xpath expr="/form/sheet/notebook/page[@string='Information']" position="after" >
+					<page string="Platforma">
+						<group>
+			        		<field name="points" />
+			        		<field name="circs" />
+			        	</group>
+		        	</page>
+				</xpath>
+	    	</field>
+		</record>
+	</data>
+</openerp>
