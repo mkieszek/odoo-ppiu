@@ -49,10 +49,11 @@ class res_partner(Model):
             return []
     
     _columns = {
-        'partner': fields.boolean('Partner'),
+        'partner_recomend': fields.boolean('Partner Rekomendujący'),
+        'partner_sale': fields.boolean('Partner Handlowy'),
         'sum_points': fields.integer('Punkty prowizji', readonly=True),
         'provision_ppiu': fields.integer('Prowizje dla PPIU %'),
         'provision_points': fields.function(_get_provision, type='float', string="Poziom prowizji %", store=False, readonly=True),
         'access_partner': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
-        'provision_ppiu_': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
+        'provision_ppiu': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
     }

@@ -3,3 +3,8 @@ access_ppiu_sale_points_read,ppiu.sale.points.read,model_ppiu_sale_points,group_
 access_ppiu_sale_points_write,ppiu.sale.points.write,model_ppiu_sale_points,group_ppiu_sale_points_write,0,1,0,0
 access_ppiu_sale_points_create,ppiu.sale.points.create,model_ppiu_sale_points,group_ppiu_sale_points_create,0,0,1,0
 access_ppiu_sale_points_unlink,ppiu.sale.points.unlink,model_ppiu_sale_points,group_ppiu_sale_points_unlink,0,0,0,1
+access_ppiu_payment_read,ppiu.payment.read,model_ppiu_payment,group_ppiu_payment_read,1,0,0,0
+access_ppiu_payment_write,ppiu.payment.write,model_ppiu_payment,group_ppiu_payment_write,0,1,0,0
+access_ppiu_payment_create,ppiu.payment.create,model_ppiu_payment,group_ppiu_payment_create,0,0,1,0
+access_ppiu_payment_unlink,ppiu.payment.unlink,model_ppiu_payment,group_ppiu_payment_unlink,0,0,0,1
+access_res_users_read,res.users.read,base.model_res_users,,1,0,0,0

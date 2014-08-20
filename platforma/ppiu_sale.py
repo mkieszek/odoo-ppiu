@@ -11,10 +11,11 @@ class ppiu_sale(osv.Model):
     _inherit = ['mail.thread']
     _description = 'Sale'
     _columns = {
-        'partner_id': fields.many2one('res.partner', 'Partner', domain="[('partner','=',True)]", required=True),
+        'partner_id': fields.many2one('res.partner', 'Partner Rekomendujący', domain="[('partner_recomend','=',True)]", required=True),
         'product_id': fields.many2one('product.product', 'Produkt', required=True),
-        'count_product': fields.integer('Ilość produktu'),
-        'points': fields.related('product_id', 'points', type='integer', string='Punkty za szt.', readonly=True),
+        'value': fields.float('Wartość'),
+        #'count_product': fields.integer('Ilość produktu'),
+        #'points': fields.related('product_id', 'points', type='integer', string='Punkty za szt.', readonly=True),
         'lead_id': fields.many2one('crm.lead', 'Lead', domain="[('sequence','=',70)]"),
         'payment_ids': fields.one2many('ppiu.payment', 'sale_id', 'Wypłaty'),
     }
@@ -28,7 +29,7 @@ class ppiu_sale(osv.Model):
             return res
         reads = self.read(cr, uid, ids, ['lead_id', 'partner_id'], context)
         for record in reads:
-            lead = record['lead_id'][1]
+            lead = ''#record['lead_id'][1]
             partner = record['partner_id'][1]
             res.append((record['id'], lead + ' - ' + partner))
         return res
