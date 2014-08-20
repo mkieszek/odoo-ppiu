@@ -116,6 +116,66 @@
             <field name="category_id" ref="module_category_ppiu"/>
 			<field name="implied_ids" eval="[(4, ref('group_ppiu_payment_write'))]"/>
         </record>
+        <!-- Sprzedaże -->
+        <record id="group_ppiu_sale_read" model="res.groups">
+            <field name="name">Sale Read</field>
+            <field name="comment">Sale Read</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+        </record>
+        <record id="group_ppiu_sale_read_partner" model="res.groups">
+            <field name="name">Sale Read Partner</field>
+            <field name="comment">Sale Read Partner</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_read'))]"/>
+        </record>
+        <record id="group_ppiu_sale_write" model="res.groups">
+            <field name="name">Sale Write</field>
+            <field name="comment">Sale Write</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_read'))]"/>
+        </record>
+        <record id="group_ppiu_sale_create" model="res.groups">
+            <field name="name">Sale Create</field>
+            <field name="comment">Sale Create</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_write'))]"/>
+        </record>
+        <record id="group_ppiu_sale_unlink" model="res.groups">
+            <field name="name">Sale Unlink</field>
+            <field name="comment">Sale Unlink</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_sale_write'))]"/>
+        </record>
+        <!-- Sygnały/Szanse -->
+        <record id="group_ppiu_lead_read" model="res.groups">
+            <field name="name">Lead Read</field>
+            <field name="comment">Lead Read</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+        </record>
+        <record id="group_ppiu_lead_read_partner" model="res.groups">
+            <field name="name">Lead Read Partner</field>
+            <field name="comment">Lead Read Partner</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_read'))]"/>
+        </record>
+        <record id="group_ppiu_lead_write" model="res.groups">
+            <field name="name">Lead Write</field>
+            <field name="comment">Lead Write</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_read'))]"/>
+        </record>
+        <record id="group_ppiu_lead_create" model="res.groups">
+            <field name="name">Lead Create</field>
+            <field name="comment">Lead Create</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_write'))]"/>
+        </record>
+        <record id="group_ppiu_lead_unlink" model="res.groups">
+            <field name="name">Lead Unlink</field>
+            <field name="comment">Lead Unlink</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_write'))]"/>
+        </record>
         
     	<!-- Dodatkowe -->
     	<!-- 
@@ -130,8 +190,16 @@
    		<record id="ppiu_payment_read_partner1" model="ir.rule">
             <field name="name">Rule Payment - Partner</field>
             <field ref="model_ppiu_payment" name="model_id"/>
-		    <field name="domain_force">[('partner_id.user_id.id','=',user.id)]</field>
+		    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
             <field name="groups" eval="[(4, ref('group_ppiu_payment_read_partner'))]"/>
         </record>
+        <!-- 
+        <record id="ppiu_sale_read_partner" model="ir.rule">
+            <field name="name">Rule Sale - Partner</field>
+            <field ref="model_ppiu_sale" name="model_id"/>
+		    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ppiu_sale_read_partner'))]"/>
+        </record>
+         -->
     </data>
 </openerp>

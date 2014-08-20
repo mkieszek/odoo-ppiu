@@ -17,12 +17,6 @@ class res_partner(Model):
             val[partner.id] = point.provision
         return val
     
-    def _get_partner_ids_search(self, cr, uid, ids_i, name, args, context):
-        ids = []
-        pdb.set_trace()
-        return [('id','in',tuple([7,9]))]
-
-    
     def _get_access_partner(self, cr, uid, ids, name, arg, context=None):
         val={}
         groups_obj = self.pool.get('res.groups')
@@ -53,7 +47,7 @@ class res_partner(Model):
         'partner_sale': fields.boolean('Partner Handlowy'),
         'sum_points': fields.integer('Punkty prowizji', readonly=True),
         'provision_ppiu': fields.integer('Prowizje dla PPIU %'),
-        'provision_points': fields.function(_get_provision, type='float', string="Poziom prowizji %", store=False, readonly=True),
+        'provision_points': fields.function(_get_provision, type='float', string="Prowizja %", store=False, readonly=True),
         'access_partner': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
         'provision_ppiu': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
     }

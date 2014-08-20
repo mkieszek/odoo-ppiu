@@ -9,6 +9,9 @@
 					<field name="points_from" />
 					<field name="points_to" />
 					<field name="provision" />
+					<field name="provision_national" />
+					<field name="provision_other" />
+					<field name="part_profit" />
 				</tree>
 			</field>
 		</record>

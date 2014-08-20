@@ -13,7 +13,7 @@
                      <sheet>
 						<group col="2">
 							<group>
-								<field name="sale_id" />
+								<!-- <field name="sale_id" /> -->
 								<field name="partner_id" />
 								<field name="add_points" />
 							</group>
@@ -33,7 +33,7 @@
             <field name="model">ppiu.payment</field>
             <field name="arch" type="xml">
 				<tree string="Payment" create="false">
-					<field name="sale_id" />
+					<!-- <field name="sale_id" /> -->
 					<field name="partner_id" />
 					<field name="add_points" />
 					<field name="state" />
@@ -47,7 +47,7 @@
 			<field name="model">ppiu.payment</field>
             <field name="arch" type="xml">
 			<search string="Wszystkie wypłaty">
-				<field name="sale_id" />
+				<!-- <field name="sale_id" /> -->
 				<field name="partner_id" />
 				<field name="add_points" />
 				<field name="state" />

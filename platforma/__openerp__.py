@@ -37,8 +37,6 @@
     'update_xml' : [
                     'view/ppiu_sale_points_view.xml',
                     'view/res_partner_view.xml',
-                    'view/product_view.xml',
-                    'view/ppiu_sale_view.xml',
                     'view/ppiu_payment_view.xml',
                     'view/crm_lead_view.xml',
                     
