@@ -6,13 +6,12 @@
 		<menuitem name="Platforma" id="menu_ppiu_platform_platform" parent="menu_ppiu_platform" sequence="1"/>
 	
 		<menuitem name="Klienci" id="menu_ppiu_clients" parent="menu_ppiu_platform_platform" action="action_ppiu_customers_form" sequence="10"/>
-		<menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11"/>
-		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12"/>
-		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13"/>
-		<!-- <menuitem name="Produkty" id="menu_ppiu_products" parent="menu_ppiu_platform_platform" action="product.product_normal_action" sequence="14"/> -->
-		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="15"/>
-		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="16"/>
-		<!-- <menuitem name="Sprzedaże" id="menu_ppiu_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_sale" sequence="17"/> -->
+		<menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" groups="group_ppiu_struct_partner_recomended_visible" />
+		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" groups="group_ppiu_partner_recomended_visible" />
+		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" groups="group_ppiu_partner_sale_visible" />
+		<menuitem name="Produkty" id="menu_ppiu_products" parent="menu_ppiu_platform_platform" action="action_ppiu_product" sequence="14"/>
+		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="15" groups="group_ppiu_lead_visible" />
+		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="16" groups="group_ppiu_oppor_visible" />
 		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="18"/>
 		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="19"/>
     </data>

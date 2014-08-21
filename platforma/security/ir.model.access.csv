@@ -15,3 +15,8 @@ access_ppiu_lead_read,ppiu.lead.read,crm.model_crm_lead,group_ppiu_lead_read,1,0
 access_ppiu_lead_write,ppiu.lead.write,crm.model_crm_lead,group_ppiu_lead_write,0,1,0,0
 access_ppiu_lead_create,ppiu.lead.create,crm.model_crm_lead,group_ppiu_lead_create,0,0,1,0
 access_ppiu_lead_unlink,ppiu.lead.unlink,crm.model_crm_lead,group_ppiu_lead_unlink,0,0,0,1
+access_ppiu_product_read,ppiu.product.read,model_ppiu_product,group_ppiu_product_read,1,0,0,0
+access_ppiu_product_write,ppiu.product.write,model_ppiu_product,group_ppiu_product_write,0,1,0,0
+access_ppiu_product_create,ppiu.product.create,model_ppiu_product,group_ppiu_product_create,0,0,1,0
+access_ppiu_product_unlink,ppiu.product.unlink,model_ppiu_product,group_ppiu_product_unlink,0,0,0,1
+access_ppiu_crm_payment_mode,ppiu.crm.payment.mode,crm.model_crm_payment_mode,,1,0,0,0

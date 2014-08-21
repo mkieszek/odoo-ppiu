@@ -29,6 +29,7 @@
 						<group>
 							<field name="sum_points" />
 							<field name="provision_points" />
+							<field name="provision_ppiu" />
 						</group>
 						<group>
 							<!-- <field name="provision_ppiu" /> -->
@@ -36,6 +37,7 @@
 					</group>
 				</page>
 	        </xpath>
+	        <xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="replace" />
         </field>
     </record>
     
@@ -69,6 +71,7 @@
                 <field name="display_name"/>
                 <field name="phone"/>
                 <field name="email"/>
+                <field name="sum_points" />
                 <field name="provision_points"/>
                 <field name="parent_id" invisible="1"/>
             </tree>
@@ -136,7 +139,24 @@
          <field name="name">Partnerzy</field>
          <field eval="'ir.actions.act_window,%d'%action_ppiu_partner_form" name="value"/>
 		 <field name="object" eval="True"/>
-     </record>
+     </record> 
+     
+	 <!--    <record model="ir.values" id="ir_open_journal_period">
+		    <field name="key2">tree_but_open</field>
+		    <field name="model">account.journal.period</field>
+		    <field name="name">Open Journal</field>
+		    <field name="value" eval="'ir.actions.wizard,%d'%action_move_journal_line_form_select"/>
+		    <field name="res_id" eval="3"/>
+		    <field name="object" eval="True"/>
+		</record>
+      <record model="ir.values" id="account_analytic_balance_values">
+            <field name="model_id" ref="analytic.model_account_analytic_account" />
+            <field name="name">Account Analytic Balance</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_account_analytic_balance'))" />
+            <field name="key">action</field>
+            <field name="model">account.analytic.account</field>
+        </record> -->
      
 </data>
 </openerp>

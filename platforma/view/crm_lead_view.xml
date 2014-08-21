@@ -7,8 +7,14 @@
             <field name="priority">20</field>
         	<field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
+            	<xpath expr="/form/header/button[@name='case_mark_lost']" position="after">
+					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" />
+		        </xpath>
+            	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
+		            <field name="user_id" string="Partner rekomendowany" />
+		            <field name="partner_sale_id" />
+		        </xpath>
                 <xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
-		            <field name="partner_partner_id" />
 		            <field name="recom_partner_id" />
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
@@ -16,25 +22,54 @@
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='categ_ids']" position="after">
 					<field name="product_id" />
+					<field name="sale_date" />
+					<field name="value" />
+					<field name="provision_p" />
+					<field name="provision" />
+		        </xpath>
+		        <xpath expr="/form/sheet/notebook" position="inside">
+					<page string="Wypłaty" groups="platforma.group_ppiu_administration,platforma.group_ppiu_partner_recomend">
+						<field name="payment_ids" readonly="1">
+							<tree>
+								<field name="partner_id" />
+								<field name="add_points" />
+								<field name="state" />
+								<field name="amount" />
+							</tree>
+						</field>
+					</page>
 		        </xpath>
             </field>
         </record>
+
         <record model="ir.ui.view" id="ppiu_case_form_view_leads">
 			<field name="name">CRM - Leads Form</field>
 			<field name="model">crm.lead</field>
         	<field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
 			<field name="arch" type="xml">
-				<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
-					<field name="partner_partner_id" />
-					<field name="recom_partner_id" />
-				</xpath>
-				<xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
-					<attribute name="domain">[('customer','=',True)]</attribute>
-				</xpath>
-		        <xpath expr="/form/sheet/group/group/field[@name='categ_ids']" position="after">
-					<field name="product_id" />
+            	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
+		            <field name="user_id" string="Partner rekomendowany" />
 		        </xpath>
 			</field>
+        </record>
+
+        <record model="ir.ui.view" id="ppiu_case_tree_view_oppor">
+            <field name="name">Opportunities PPiU Tree</field>
+            <field name="model">crm.lead</field>
+        	<field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/tree/field[@name='country_id']" position="replace" />
+            	<xpath expr="/tree/field[@name='date_action']" position="replace" />
+            	<xpath expr="/tree/field[@name='title_action']" position="replace" />
+            	<xpath expr="/tree/field[@name='probability']" position="replace" />
+            	<xpath expr="/tree/field[@name='planned_revenue']" position="replace" >
+            		<field name="sale_date" />
+            		<field name="value" />
+            	</xpath>
+            	<xpath expr="/tree/field[@name='user_id']" position="replace" >
+            		<field name="user_id" string="Partner rekomendowany" />
+            	</xpath>
+            </field>
         </record>
     </data>
 </openerp>

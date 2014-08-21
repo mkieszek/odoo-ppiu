@@ -32,6 +32,15 @@ class res_partner(Model):
                 val[partner.id] = True
         return val
     
+    _columns = {
+        'partner_recomend': fields.boolean('Partner Rekomendujący'),
+        'partner_sale': fields.boolean('Partner Handlowy'),
+        'sum_points': fields.integer('Punkty prowizji', readonly=True),
+        'provision_ppiu': fields.float('Prowizje %'),
+        'provision_points': fields.function(_get_provision, type='float', string="Poziom prowizyjny %", store=False, readonly=True),
+        'access_partner': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
+    }
+    
     def get_parent_ids(self, cr, uid, partner_id):
         parent_ids = []
         partner = self.browse(cr, uid, partner_id)
@@ -41,13 +50,3 @@ class res_partner(Model):
             return parent_ids
         else:
             return []
-    
-    _columns = {
-        'partner_recomend': fields.boolean('Partner Rekomendujący'),
-        'partner_sale': fields.boolean('Partner Handlowy'),
-        'sum_points': fields.integer('Punkty prowizji', readonly=True),
-        'provision_ppiu': fields.integer('Prowizje dla PPIU %'),
-        'provision_points': fields.function(_get_provision, type='float', string="Prowizja %", store=False, readonly=True),
-        'access_partner': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
-        'provision_ppiu': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
-    }

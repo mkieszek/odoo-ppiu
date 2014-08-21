@@ -7,17 +7,19 @@
 			<field name="arch" type="xml">
                  <form string="Wypłata" version="7.0" create="false" edit="false">
                      <header>
-                    	 <button name="paid" type="object" string="Zapłacony" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':[('state','=','2')]}"/>
+                    	 <button name="in_progress" type="object" string="W trakcie" icon="terp-project" groups="platforma.group_ppiu_administration" attrs="{'invisible':[('state','in',['2','3'])]}"/>
+                    	 <button name="paid" type="object" string="Zapłacony" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':[('state','in',['1','3'])]}"/>
                     	 <field name="state" widget="statusbar"/>
                      </header>
                      <sheet>
 						<group col="2">
 							<group>
-								<!-- <field name="sale_id" /> -->
+								<field name="lead_id" />
 								<field name="partner_id" />
-								<field name="add_points" />
 							</group>
 							<group>
+								<field name="add_points" />
+								<field name="amount" />
 							</group>
 						</group>
                      </sheet>
@@ -33,10 +35,11 @@
             <field name="model">ppiu.payment</field>
             <field name="arch" type="xml">
 				<tree string="Payment" create="false">
-					<!-- <field name="sale_id" /> -->
+					<field name="lead_id" />
 					<field name="partner_id" />
 					<field name="add_points" />
 					<field name="state" />
+					<field name="amount" />
 				</tree>
 			</field>
 		</record>
@@ -47,16 +50,17 @@
 			<field name="model">ppiu.payment</field>
             <field name="arch" type="xml">
 			<search string="Wszystkie wypłaty">
-				<!-- <field name="sale_id" /> -->
+				<field name="lead_id" />
 				<field name="partner_id" />
 				<field name="add_points" />
 				<field name="state" />
+				<field name="amount" />
 			</search>
 			</field>
 		</record>
         
 		<record id="action_ppiu_payment" model="ir.actions.act_window">
-            <field name="name">Payments</field>
+            <field name="name">Wypłata</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">ppiu.payment</field>
             <field name="view_id" ref="ppiu_payment_tree"/>
