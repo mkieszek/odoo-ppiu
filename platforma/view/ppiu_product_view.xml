@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+       	<record model="ir.ui.view" id="ppiu_product_form">
+			<field name="name">ppiu.product.form</field>
+			<field name="model">ppiu.product</field>
+			<field name="arch" type="xml">
+                 <form string="Produkt" version="7.0" >
+                     <header>
+                     </header>
+                     <sheet>
+                     	<label for="name" class="oe_edit_only" />
+                     	<h1>
+                     		<field name="name" />
+                     	</h1>
+						<group col="2">
+							<group string="Szczegóły produktu">
+								<field name="product_type" />
+								<field name="product_category" />
+								<field name="active" />
+							</group>
+							<group string="Szczegóły handlowe">
+								<field name="partner_sale_id" />
+								<field name="points" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Opis produktu">
+								<field name="description" />
+							</page>
+						</notebook>
+                     </sheet>
+                 </form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ppiu_product_tree">
+			<field name="name">PPiU Product</field>
+            <field name="model">ppiu.product</field>
+            <field name="arch" type="xml">
+				<tree string="Produkty">
+					<field name="name" />
+					<field name="partner_sale_id" />
+					<field name="points" />
+					<field name="product_type" />
+					<field name="product_category" />
+					<field name="active" />
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record model="ir.ui.view" id="ppiu_product_search">
+       		<field name="name">ppiu.product.search</field>
+			<field name="model">ppiu.product</field>
+            <field name="arch" type="xml">
+			<search string="Wszystkie Produkty">
+				<field name="name" />
+				<field name="partner_sale_id" />
+				<field name="points" />
+				<field name="product_type" />
+				<field name="product_category" />
+				<field name="active" />
+			</search>
+			</field>
+		</record>
+        
+		<record id="action_ppiu_product" model="ir.actions.act_window">
+            <field name="name">Produkty</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ppiu.product</field>
+            <field name="view_id" ref="ppiu_product_tree"/>
+             <field name="search_view_id" ref="ppiu_product_search"/>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+        </record>
+     </data>
+</openerp>

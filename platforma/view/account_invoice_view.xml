@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="view_ppiu_account_invoice_form">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_invoice_pl_og.view_account_pl_invoice_form"/>
+        <field name="arch" type="xml">
+           	<xpath expr="/form/sheet/notebook" position="inside">
+           		<page string="Szanse">
+	           		<field name="lead_ids" readonly="1">
+	           			<tree>
+	           				<field name="name" />
+	           				<field name="user_id" />
+	           				<field name="stage_id" />
+	           			</tree>
+	           		</field>
+           		</page>
+	        </xpath>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_ppiu_invoice_form">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="attributes">
+           		<attribute name="domain">[]</attribute>
+	        </xpath>
+	        <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
+	        	<attribute name="invisible">1</attribute>
+	        </xpath>
+	        
+	        <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="before">
+				<field name="ppiu_product_id" />
+	        </xpath>
+        </field>
+    </record>
+</data>
+</openerp>

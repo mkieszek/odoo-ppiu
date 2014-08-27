@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="state_paid" model="workflow.transition">
+            <field name="act_to" ref="account.act_open"/>
+            <field name="act_from" ref="account.act_paid"/>
+    		<field name="trigger_model">account.invoice</field>
+    		<field name="trigger_expr_id">change_state_paid()</field>
+        </record>
+    </data>
+</openerp>

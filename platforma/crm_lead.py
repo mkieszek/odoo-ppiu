@@ -76,7 +76,11 @@ class crm_lead(Model):
                          'state': '1',
                          'amount': amount,
                          }
-        payment_obj.create(cr, uid, payment_value)
+        if amount != 0.0:
+            payment_obj.create(cr, uid, payment_value)
+        partner_points = partner.sum_points + points
+        partner_obj.write(cr, uid, [partner.id], {'sum_points': partner_points})
+        
         if partner.parent_id:
             amount = 0.0
             amount = provision*((partner.parent_id.provision_points-partner.provision_points)/100)
