@@ -23,6 +23,7 @@ class crm_lead(Model):
         'provision_p': fields.float('Prowizja 30%', readonly=True),
         'provision': fields.function(_get_provision, type='float', string="Prowizja", store=False, readonly=True),
         'value': fields.float('Wartość'),
+        'account_id': fields.many2one('account.invoice', 'Faktura'),
     }
     
     _defaults = {
@@ -34,11 +35,11 @@ class crm_lead(Model):
         points = 5
         if lead.product_id.points != '1':
             points = round(lead.value/100)
-        
+
         if lead.user_id.partner_id and lead.user_id.partner_id != lead.partner_id and not lead.partner_id.partner_recomend:
             partner = lead.user_id.partner_id
             amount = 0.0
-            amount = lead.provision*(partner.provision_points/100)
+            amount = lead.provision+lead.provision*(partner.provision_points/100)
             self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision, amount)
             
         elif lead.user_id.partner_id and lead.user_id.partner_id == lead.partner_id:

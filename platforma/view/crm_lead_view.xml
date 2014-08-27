@@ -7,8 +7,12 @@
             <field name="priority">20</field>
         	<field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group/label[@for='title_action']" position="before">
+            		<field name="account_id" readonly="1"/>
+		        </xpath>
             	<xpath expr="/form/header/button[@name='case_mark_lost']" position="after">
-					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" />
+            		<field name="sequence" invisible="1" />
+					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':['|',('sequence','=',70),('payment_ids','!=',[])]}"/>
 		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
 		            <field name="user_id" string="Partner rekomendowany" />
@@ -68,8 +72,10 @@
             	</xpath>
             	<xpath expr="/tree/field[@name='user_id']" position="replace" >
             		<field name="user_id" string="Partner rekomendowany" />
+		            <field name="account_id" />
             	</xpath>
             </field>
         </record>
+		
     </data>
 </openerp>

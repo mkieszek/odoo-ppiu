@@ -7,10 +7,6 @@ access_ppiu_payment_read,ppiu.payment.read,model_ppiu_payment,group_ppiu_payment
 access_ppiu_payment_write,ppiu.payment.write,model_ppiu_payment,group_ppiu_payment_write,0,1,0,0
 access_ppiu_payment_create,ppiu.payment.create,model_ppiu_payment,group_ppiu_payment_create,0,0,1,0
 access_ppiu_payment_unlink,ppiu.payment.unlink,model_ppiu_payment,group_ppiu_payment_unlink,0,0,0,1
-access_ppiu_sale_read,ppiu.sale.read,model_ppiu_sale,group_ppiu_sale_read,1,0,0,0
-access_ppiu_sale_write,ppiu.sale.write,model_ppiu_sale,group_ppiu_sale_write,0,1,0,0
-access_ppiu_sale_create,ppiu.sale.create,model_ppiu_sale,group_ppiu_sale_create,0,0,1,0
-access_ppiu_sale_unlink,ppiu.sale.unlink,model_ppiu_sale,group_ppiu_sale_unlink,0,0,0,1
 access_ppiu_lead_read,ppiu.lead.read,crm.model_crm_lead,group_ppiu_lead_read,1,0,0,0
 access_ppiu_lead_write,ppiu.lead.write,crm.model_crm_lead,group_ppiu_lead_write,0,1,0,0
 access_ppiu_lead_create,ppiu.lead.create,crm.model_crm_lead,group_ppiu_lead_create,0,0,1,0

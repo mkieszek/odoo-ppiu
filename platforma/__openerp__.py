@@ -27,7 +27,7 @@
     'description': """ """,
     'author': 'Via IT Solution',
     'website': 'http://www.viait.pl ',
-    'depends': ['crm','product'],
+    'depends': ['crm','product','account_invoice_pl_og'],
     'data': ['security/security.xml',
              'security/ir.model.access.csv'],
     'demo': [],
@@ -40,6 +40,8 @@
                     'view/res_partner_view.xml',
                     'view/ppiu_payment_view.xml',
                     'view/crm_lead_view.xml',
+                    'view/account_invoice_view.xml',
+                    'wizard/ppiu_lead2invoice_view.xml',
                     
                     'view/ppiu_menu.xml',
                     ],

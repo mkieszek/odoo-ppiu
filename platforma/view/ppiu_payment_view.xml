@@ -55,6 +55,16 @@
 				<field name="add_points" />
 				<field name="state" />
 				<field name="amount" />
+				<group string="Filtruj po...">
+					<filter name="do_zaplacenia" string="Do zapłacenia" domain="[('state','=','1')]" icon="terp-camera_test"/>
+					<filter name="w_trakcie" string="W trakcie" domain="[('state','=','2')]" icon="terp-camera_test"/>
+					<filter name="zaplacone" string="Zapłacone" domain="[('state','=','3')]" icon="terp-camera_test"/>
+				</group>
+				<group string="Grupuj po...">
+           			<filter string="Partner" context="{'group_by' : 'partner_id'}" />
+           			<filter string="Szansa" context="{'group_by' : 'lead_id'}" />
+           			<filter string="Status" context="{'group_by' : 'state'}" />
+           		</group>
 			</search>
 			</field>
 		</record>
