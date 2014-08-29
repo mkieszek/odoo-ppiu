@@ -6,17 +6,17 @@
             <field name="model">ppiu.lead2invoice</field>
             <field name="arch" type="xml">
                 <form string="Szanse do faktury" version="7.0">
-                	<group string="Wybrane szanse">
-                	</group>
+                	<div>Dodać można wyłącznie szanse, które są w statusie Sukces, a także nie są już powiązane z inną fakturą.</div>
+                	<field name="lead_ids" readonly="1"/>
                     <footer>
-                        <button name="to_invoice" string="To invoice" type="object" class="oe_highlight"/> 
-                        <button special="cancel" string="Cancel" type="object" class="oe_link"/>
+                        <button name="to_invoice" string="Do faktury" type="object" class="oe_highlight"/> 
+                        <button special="cancel" string="Anuluj" type="object" class="oe_link"/>
                     </footer>
                 </form>
             </field>
         </record>
 
-		<act_window name="Utwórz fakturę"
+		<act_window name="Szanse do dodania"
 		    res_model="ppiu.lead2invoice"
 		    src_model="crm.lead"
 		    key2="client_action_multi" 

@@ -83,7 +83,7 @@ class crm_lead(Model):
         
         if partner.parent_id:
             amount = 0.0
-            amount = provision*((partner.parent_id.provision_points-partner.provision_points)/100)
+            amount = provision*((partner.parent_id.provision_points-partner_obj._get_provision_p(cr, uid, partner.id, partner.sum_points-points))/100)
             parent_ids = self.create_payment(cr, uid, partner.parent_id.id, lead_id, points, provision, amount)
             
         

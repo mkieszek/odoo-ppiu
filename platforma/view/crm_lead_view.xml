@@ -12,10 +12,10 @@
 		        </xpath>
             	<xpath expr="/form/header/button[@name='case_mark_lost']" position="after">
             		<field name="sequence" invisible="1" />
-					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':['|',('sequence','=',70),('payment_ids','!=',[])]}"/>
+					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':['|',('sequence','!=',70),('payment_ids','!=',[])]}"/>
 		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
-		            <field name="user_id" string="Partner rekomendowany" />
+		            <field name="user_id" string="Partner rekomendujący" />
 		            <field name="partner_sale_id" />
 		        </xpath>
                 <xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
@@ -75,6 +75,17 @@
             		<field name="partner_sale_id" />
 		            <field name="account_id" />
             	</xpath>
+            </field>
+        </record>
+        
+        <record id="view_ppiu_lead2opportunity_partner" model="ir.ui.view">
+            <field name="name">crm.lead2opportunity.partner.form</field>
+            <field name="model">crm.lead2opportunity.partner</field>
+        	<field name="inherit_id" ref="crm.view_crm_lead2opportunity_partner"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/group/field[@name='user_id']" position="replace">
+		            <field name="user_id" class="oe_inline" on_change="on_change_user(user_id, section_id, context)" string="Partner rekomendowany" />
+		        </xpath>
             </field>
         </record>
 		

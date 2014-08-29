@@ -27,7 +27,7 @@
     'description': """ """,
     'author': 'Via IT Solution',
     'website': 'http://www.viait.pl ',
-    'depends': ['crm','product','account_invoice_pl_og'],
+    'depends': ['crm','product','l10n_chart_pl_2011','account_invoice_pl_og'],
     'data': ['security/security.xml',
              'security/ir.model.access.csv',
              'view/account_invoice_workflow.xml'],
