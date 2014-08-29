@@ -17,7 +17,7 @@
 							<group string="Szczegóły produktu">
 								<field name="product_type" />
 								<field name="product_category" />
-								<field name="active" />
+								<field name="is_active" />
 							</group>
 							<group string="Szczegóły handlowe">
 								<field name="partner_sale_id" />
@@ -44,7 +44,7 @@
 					<field name="points" />
 					<field name="product_type" />
 					<field name="product_category" />
-					<field name="active" />
+					<field name="is_active" />
 				</tree>
 			</field>
 		</record>
@@ -60,7 +60,14 @@
 				<field name="points" />
 				<field name="product_type" />
 				<field name="product_category" />
-				<field name="active" />
+				<filter name="is_active2" string="Aktywne" domain="[('is_active','=',1)]" icon="terp-camera_test"/>
+				
+				<group expand="0" string="Grupuj po...">
+					<filter string="Partner handlowy" domain="[]" context="{'group_by':'partner_sale_id'}"/>
+					<filter string="Punktacja" domain="[]" context="{'group_by':'points'}"/>
+					<filter string="Typ produktu" domain="[]" context="{'group_by':'product_type'}"/>
+					<filter string="Kategoria produktu" domain="[]" context="{'group_by':'product_category'}"/>
+				</group>
 			</search>
 			</field>
 		</record>

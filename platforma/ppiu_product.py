@@ -15,7 +15,7 @@ class ppiu_product(osv.Model):
     _columns = {
         'name': fields.char('Nazwa produktu', required=True),
         'product_type': fields.selection(TYPE, 'Typ produktu'),
-        'active': fields.boolean('Aktywny'),
+        'is_active': fields.boolean('Aktywny'),
         'points': fields.selection(POINTS, 'Punktacja', required=True),
         'partner_sale_id': fields.many2one('res.partner', 'Partner Handlowy', domain="[('partner_sale','=',True)]", required=True),
         'description': fields.text('Opis'),

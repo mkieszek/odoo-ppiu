@@ -3,6 +3,7 @@
 @author: mbereda
 '''
 from openerp.osv import osv, fields
+from openerp.addons.mail.mail_message import decode
 import datetime
 import base64
 import pdb
@@ -29,6 +30,8 @@ class ppiu_lead2invoice(osv.osv_memory):
     def to_invoice(self, cr, uid, ids, context=None):
         lead_obj = self.pool.get('crm.lead')
         context['lead_ids'] = self.get_lead_to_invoice(cr, uid, context['active_ids'])
+        if not context['lead_ids']:
+            raise osv.except_osv(decode('Ostrzeżenie'), decode('Nie wybrano właściwych szans'))
         for lead in lead_obj.browse(cr, uid, context['lead_ids']):
             if lead.partner_sale_id:
                 context['default_partner_id'] = lead.partner_sale_id.id

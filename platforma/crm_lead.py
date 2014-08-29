@@ -16,7 +16,7 @@ class crm_lead(Model):
     _columns = {
         'partner_sale_id': fields.many2one('res.partner', 'Partner handlowy', domain="[('partner_sale','=',True)]"),
         'recom_partner_id': fields.many2one('res.partner', 'Partner polecający', domain="[('partner_recomend','=',True)]"),
-        'product_id': fields.many2one('ppiu.product', 'Produkt', domain="[('active','=',True)]"),
+        'product_id': fields.many2one('ppiu.product', 'Produkt', domain="[('is_active','=',True)]"),
         'sequence': fields.related('stage_id', 'sequence', type='integer', string='Sequence', readonly=True),
         'payment_ids': fields.one2many('ppiu.payment', 'lead_id', 'Wypłaty'),
         'sale_date': fields.date('Data sprzedaży'),
