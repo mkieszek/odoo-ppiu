@@ -104,18 +104,7 @@
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
 	</record>
 	
-	<record id="action_ppiu_partner_list2" model="ir.actions.act_window">
-	    <field name="type">ir.actions.act_window</field>
-	    <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,kanban,form</field>
-	    <field name="context">{'default_customer': False,'default_partner_recomend': True}</field>
-	    <field name="domain">[('partner_recomend','=',True)]</field>  
-        <field name="search_view_id" ref="base.view_res_partner_filter"/>
-        <field name="view_id" ref="view_ppiu_partner_list"/>
-	</record>
-	
-    <record id="view_ppiu_partner_list" model="ir.ui.view">
+	<record id="view_ppiu_partner_list" model="ir.ui.view">
         <field name="name">ppiu.res.partner.list</field>
         <field name="model">res.partner</field>
         <field name="priority">1</field>
@@ -129,6 +118,17 @@
             </tree>
         </field>
     </record>
+    
+	<record id="action_ppiu_partner_list2" model="ir.actions.act_window">
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+	    <field name="context">{'default_customer': False,'default_partner_recomend': True}</field>
+	    <field name="domain">[('partner_recomend','=',True)]</field>  
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="view_id" ref="view_ppiu_partner_list"/>
+	</record>
 	
 	<record id="ir_partner_open" model="ir.values">
          <field eval="'tree_but_open'" name="key2"/>
