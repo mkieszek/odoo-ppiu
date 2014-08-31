@@ -25,6 +25,7 @@
 							<field name="sum_points" />
 							<field name="provision_points" />
 							<field name="provision_ppiu" />
+							<field name="parent_id" />
 						</group>
 						<group>
 						</group>
