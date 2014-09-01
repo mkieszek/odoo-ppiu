@@ -7,10 +7,21 @@ import pdb
 class crm_lead(Model):
     _inherit = "crm.lead"
     
+    def _get_provision_value(self, cr, uid, ids, name, arg, context=None):
+        val={}
+        for lead in self.browse(cr, uid, ids):
+            amount = 0.0
+            if lead.product_id.provision_ppiu and lead.product_id.provision_ppiu != 0.0:
+                amount = lead.value*(lead.product_id.provision_ppiu/100)
+            elif lead.partner_sale_id and lead.partner_sale_id.provision_ppiu and lead.partner_sale_id.provision_ppiu != 0.0:
+                amount = lead.value*(lead.partner_sale_id.provision_ppiu/100)
+            val[lead.id] = amount
+        return val
+    
     def _get_provision(self, cr, uid, ids, name, arg, context=None):
         val={}
         for lead in self.browse(cr, uid, ids):
-            val[lead.id] = lead.value*(lead.provision_p/100)
+            val[lead.id] = lead.provision_value*(lead.provision_p/100)
         return val
     
     _columns = {
@@ -20,9 +31,10 @@ class crm_lead(Model):
         'sequence': fields.related('stage_id', 'sequence', type='integer', string='Sequence', readonly=True),
         'payment_ids': fields.one2many('ppiu.payment', 'lead_id', 'Wypłaty'),
         'sale_date': fields.date('Data sprzedaży'),
-        'provision_p': fields.float('Prowizja 30%', readonly=True),
-        'provision': fields.function(_get_provision, type='float', string="Prowizja", store=False, readonly=True),
-        'value': fields.float('Wartość'),
+        'provision_p': fields.float('Prowizja 30% invisible', readonly=True),
+        'provision': fields.function(_get_provision, type='float', string="Prowizja 30%", store=False, readonly=True),
+        'value': fields.float('Wartość sprzedaży'),
+        'provision_value': fields.function(_get_provision_value, type='float', string="Prowizja PPiU", store=False, readonly=True),
         'account_id': fields.many2one('account.invoice', 'Faktura'),
     }
     

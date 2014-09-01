@@ -9,6 +9,8 @@ class ppiu_payment(osv.Model):
     _name = "ppiu.payment"
     _inherit = ['mail.thread']
     _description = 'Payment'
+    _rec_name = "partner_id"
+    
     _columns = {
         'lead_id': fields.many2one('crm.lead', 'Szansa'),
         'partner_id': fields.many2one('res.partner', 'Partner', domain="[('partner','=',True)]"),

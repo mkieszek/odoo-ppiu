@@ -22,14 +22,17 @@
             	<page string="Platforma" attrs="{'invisible':[('partner_sale','=',False),'|',('partner_recomend','=',False),('access_partner','=',True)]}">
 					<group col="2">
 						<group>
-							<field name="sum_points" />
-							<field name="provision_points" />
-							<field name="provision_ppiu" />
-							<field name="parent_id" />
+							<field name="ppiu_parent_id" attrs="{'invisible':[('partner_recomend','=',False)]}" />
+							<field name="sum_points" attrs="{'invisible':[('partner_recomend','=',False)]}" />
+							<field name="provision_points" attrs="{'invisible':[('partner_recomend','=',False)]}" />
+							<field name="provision_ppiu" attrs="{'invisible':[('partner_sale','=',False)]}" />
 						</group>
 						<group>
 						</group>
 					</group>
+				</page>
+				<page string="Partnerzy podrzędni" attrs="{'invisible':[('partner_recomend','=',False)]}">
+					<field name="ppiu_child_ids" readonly="1"/>
 				</page>
 	        </xpath>
 	        <xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="replace" />
@@ -60,7 +63,7 @@
         <field name="name">ppiu.res.partner.tree</field>
         <field name="model">res.partner</field>
     	<field name="type">tree</field>
-        <field name="field_parent">child_ids</field>
+        <field name="field_parent">ppiu_child_ids</field>
         <field name="arch" type="xml">
             <tree string="Contacts">
                 <field name="display_name"/>
@@ -68,7 +71,7 @@
                 <field name="email"/>
                 <field name="sum_points" />
                 <field name="provision_points"/>
-                <field name="parent_id" invisible="1"/>
+                <field name="ppiu_parent_id" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -79,7 +82,7 @@
 	    <field name="res_model">res.partner</field>
 	    <field name="view_type">tree</field>
 	    <field name="context">{'default_customer': False,'default_partner': True}</field>
-	    <field name="domain">[('partner_recomend','=',True),('parent_id','=',False)]</field>
+	    <field name="domain">[('partner_recomend','=',True),('ppiu_parent_id','=',False)]</field>
 	    <field name="view_id" ref="view_ppiu_partner_tree"/>
 	</record>
 	

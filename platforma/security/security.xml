@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
     <!-- Dodanie kategorii uprawnień -->
         <record model="ir.module.category" id="module_category_ppiu_access">
             <field name="name">Platforma produktów i usług - uprawnienia</field>
@@ -252,7 +252,6 @@
             <field name="comment">Partner Handlowy</field>
             <field name="category_id" ref="module_category_ppiu_access"/>
             <field name="implied_ids" eval="[(4, ref('group_ppiu_oppor_read_partner')),
-											(4, ref('group_ppiu_res_partner_read')),
 											(4, ref('group_ppiu_oppor_read_partner_sale')),
 											(4, ref('group_ppiu_product_read')),
 											(4, ref('group_ppiu_sale_points_read')),

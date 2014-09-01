@@ -16,7 +16,7 @@
             </field>
         </record>
 
-		<act_window name="Szanse do dodania"
+		<act_window name="Szanse do faktury"
 		    res_model="ppiu.lead2invoice"
 		    src_model="crm.lead"
 		    key2="client_action_multi" 

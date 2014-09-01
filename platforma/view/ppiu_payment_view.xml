@@ -12,14 +12,15 @@
                     	 <field name="state" widget="statusbar"/>
                      </header>
                      <sheet>
+						<h2>Wypłata</h2>
 						<group col="2">
-							<group>
-								<field name="lead_id" />
+							<group string="Szczegóły wypłaty">
 								<field name="partner_id" />
-							</group>
-							<group>
+								<field name="lead_id" />
 								<field name="add_points" />
 								<field name="amount" />
+							</group>
+							<group>
 							</group>
 						</group>
                      </sheet>

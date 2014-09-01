@@ -22,6 +22,7 @@
 							<group string="Szczegóły handlowe">
 								<field name="partner_sale_id" />
 								<field name="points" />
+								<field name="provision_ppiu" attrs="{'invisible':[('partner_sale_id','!=',user.partner_id.id)]}" />
 							</group>
 						</group>
 						<notebook>

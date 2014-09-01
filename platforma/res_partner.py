@@ -45,17 +45,19 @@ class res_partner(Model):
         'partner_recomend': fields.boolean('Partner Rekomendujący'),
         'partner_sale': fields.boolean('Partner Handlowy'),
         'sum_points': fields.integer('Punkty prowizji', readonly=True),
-        'provision_ppiu': fields.float('Prowizje %'),
+        'provision_ppiu': fields.float('Prowizja ze sprzedaży %'),
         'provision_points': fields.function(_get_provision, type='float', string="Poziom prowizyjny %", store=False, readonly=True),
         'access_partner': fields.function(_get_access_partner, type='boolean', string="Blokowanie dla Partnera", store=False, readonly=True),
+        'ppiu_parent_id': fields.many2one('res.partner', 'Partner nadrzędny', domain="[('partner_recomend','=',True),('id','!=',id)]"),
+        'ppiu_child_ids': fields.one2many('res.partner', 'ppiu_parent_id', string="Partnerzy podrzędni"),
     }
     
     def get_parent_ids(self, cr, uid, partner_id):
         parent_ids = []
         partner = self.browse(cr, uid, partner_id)
         if partner.parent_id:
-            parent_ids = self.get_parent_ids(cr, uid, partner.parent_id.id)
-            parent_ids.append(partner.parent_id.id)
+            parent_ids = self.get_parent_ids(cr, uid, partner.ppiu_parent_id.id)
+            parent_ids.append(partner.ppiu_parent_id.id)
             return parent_ids
         else:
             return []
