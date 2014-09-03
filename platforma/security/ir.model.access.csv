@@ -16,3 +16,9 @@ access_ppiu_product_write,ppiu.product.write,model_ppiu_product,group_ppiu_produ
 access_ppiu_product_create,ppiu.product.create,model_ppiu_product,group_ppiu_product_create,0,0,1,0
 access_ppiu_product_unlink,ppiu.product.unlink,model_ppiu_product,group_ppiu_product_unlink,0,0,0,1
 access_ppiu_crm_payment_mode,ppiu.crm.payment.mode,crm.model_crm_payment_mode,,1,0,0,0
+access_ppiu_res_partner_read,ppiu.res.partner.read,base.model_res_partner,group_ppiu_res_partner_read,1,0,0,0
+access_ppiu_res_partner_write,ppiu.res.partner.write,base.model_res_partner,group_ppiu_res_partner_write,0,1,0,0
+access_ppiu_res_partner_create,ppiu.res.partner.create,base.model_res_partner,group_ppiu_res_partner_create,0,0,1,0
+access_ppiu_res_partner_unlink,ppiu.res.partner.unlink,base.model_res_partner,group_ppiu_res_partner_unlink,0,0,0,1
+access_ppiu_crm_phonecall,ppiu.crm.phonecall,crm.model_crm_phonecall,group_ppiu_res_partner_read,1,1,1,0
+access_ppiu_account_move_line,ppiu.account_move_line,account.model_account_move_line,group_ppiu_res_partner_read,1,0,0,0

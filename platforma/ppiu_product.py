@@ -20,5 +20,5 @@ class ppiu_product(osv.Model):
         'partner_sale_id': fields.many2one('res.partner', 'Partner Handlowy', domain="[('partner_sale','=',True)]", required=True),
         'description': fields.text('Opis'),
         'product_category': fields.many2one('product.category', 'Kategoria produktu'),
-        'provision_ppiu': fields.float('Prowizja ze sprzedaży %'),
+        'provision_ppiu': fields.float('Prowizja ze sprzedaży %', groups="platforma.group_ppiu_administration"),
     }

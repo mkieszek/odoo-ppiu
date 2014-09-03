@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+    <data noupdate="0">
     <!-- Dodanie kategorii uprawnień -->
         <record model="ir.module.category" id="module_category_ppiu_access">
             <field name="name">Platforma produktów i usług - uprawnienia</field>
@@ -237,7 +237,6 @@
             <field name="category_id" ref="module_category_ppiu_access"/>
 			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_create')),
 											(4, ref('group_ppiu_lead_read_partner')),
-											(4, ref('group_ppiu_oppor_read_partner')),
 											(4, ref('group_ppiu_payment_read_partner')),
 											(4, ref('group_ppiu_res_partner_read')),
 											(4, ref('group_ppiu_product_read')),
@@ -254,7 +253,6 @@
             <field name="implied_ids" eval="[(4, ref('group_ppiu_oppor_read_partner')),
 											(4, ref('group_ppiu_oppor_read_partner_sale')),
 											(4, ref('group_ppiu_product_read')),
-											(4, ref('group_ppiu_sale_points_read')),
 											(4, ref('group_ppiu_partner_sale_visible')),
 											(4, ref('group_ppiu_partner_read_partner')),
 											(4, ref('group_ppiu_invoice_read_partner'))]"/>
@@ -273,25 +271,17 @@
 		    <field name="domain_force">[('user_id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('group_ppiu_lead_read_partner'))]"/>
         </record>
-        <!-- 
-        <record id="ppiu_partner_read_partner" model="ir.rule">
-            <field name="name">Rule Partner - Partner </field>
-            <field ref="model_res_partner" name="model_id"/>
-		    <field name="domain_force">[('id','in',[15])]</field>
-            <field name="groups" eval="[(4, ref('group_ppiu_partner_read_partner'))]"/>
-        </record>
-         -->
         <record id="ppiu_oppor_read_partner_sale" model="ir.rule">
             <field name="name">Rule Opportunities - Partner Sale</field>
             <field ref="model_crm_lead" name="model_id"/>
 		    <field name="domain_force">[('partner_sale_id','=',user.partner_id.id)]</field>
             <field name="groups" eval="[(4, ref('group_ppiu_oppor_read_partner_sale'))]"/>
         </record>
-        <record id="ppiu_oppor_read_partner" model="ir.rule">
-            <field name="name">Rule Opportunities - Partner Recom.</field>
+        <record id="ppiu_res_partner_read_partner_sale" model="ir.rule">
+            <field name="name">Rule Opportunities - Partner Sale</field>
             <field ref="model_crm_lead" name="model_id"/>
-		    <field name="domain_force">[('user_id','=',user.id)]</field>
-            <field name="groups" eval="[(4, ref('group_ppiu_oppor_read_partner'))]"/>
+		    <field name="domain_force">[('partner_sale_id','=',user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ppiu_oppor_read_partner_sale'))]"/>
         </record>
         <record id="ppiu_product_read_partner" model="ir.rule">
             <field name="name">Rule Product - Partner</field>
