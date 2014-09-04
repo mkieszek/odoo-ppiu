@@ -17,7 +17,7 @@ class ppiu_product(osv.Model):
         'product_type': fields.selection(TYPE, 'Typ'),
         'is_active': fields.boolean('Aktywny'),
         'points': fields.selection(POINTS, 'Punktacja', required=True),
-        'partner_sale_id': fields.many2one('res.partner', 'Partner Handlowy', domain="[('partner_sale','=',True)]", required=True),
+        'partner_sale_id': fields.many2one('res.partner', 'Partner Handlowy', domain="[('partner_sale','=',True)]", required=True, groups="platforma.group_ppiu_administration"),
         'description': fields.text('Opis'),
         'product_category': fields.many2one('product.category', 'Kategoria'),
         'provision_ppiu': fields.float('Prowizja ze sprzedaży %', groups="platforma.group_ppiu_administration"),

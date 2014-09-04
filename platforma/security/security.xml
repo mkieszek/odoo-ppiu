@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+    <data noupdate="0">
     <!-- Dodanie kategorii uprawnień -->
         <record model="ir.module.category" id="module_category_ppiu_access">
             <field name="name">Platforma produktów i usług - uprawnienia</field>
@@ -254,7 +254,9 @@
 											(4, ref('group_ppiu_oppor_read_partner_sale')),
 											(4, ref('group_ppiu_product_read')),
 											(4, ref('group_ppiu_partner_read_partner')),
-											(4, ref('group_ppiu_invoice_read_partner'))]"/>
+											(4, ref('group_ppiu_invoice_read_partner')),
+											(4, ref('group_ppiu_sale_points_read')),
+											(4, ref('group_ppiu_payment_read'))]"/>
         </record>
         
     	<!-- Dodatkowe -->         
@@ -301,5 +303,7 @@
 		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" groups="group_ppiu_partner_sale_visible" />
 		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="15" groups="group_ppiu_lead_visible" />
 		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="16" groups="group_ppiu_oppor_visible" />
+		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="18" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="19" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
     </data>
 </openerp>
