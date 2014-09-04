@@ -22,7 +22,6 @@
 		    key2="client_action_multi" 
 		    view_mode="form" target="new" 
 		    view_type="form"
-		    groups="group_ppiu_administration"
 		    id="ppiu_action_payment_change_stage" />
 	</data>
 </openerp>

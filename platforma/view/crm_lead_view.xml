@@ -16,7 +16,7 @@
 		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
 		            <field name="user_id" string="Partner rekomendujący" />
-		            <field name="partner_sale_id" />
+		            <field name="partner_sale_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
 		        </xpath>
                 <xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
 		            <field name="recom_partner_id" />
@@ -25,9 +25,9 @@
 		        	<attribute name="domain">[('customer','=',True)]</attribute>
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='categ_ids']" position="after">
-					<field name="product_id" />
+					<field name="product_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
 					<field name="sale_date" />
-					<field name="value" />
+					<field name="value" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
 					<field name="provision_value" />
 					<field name="provision_p" invisible="1" />
 					<field name="provision" invisible="1" />

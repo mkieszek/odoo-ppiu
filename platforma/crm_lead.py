@@ -7,17 +7,6 @@ import pdb
 class crm_lead(Model):
     _inherit = "crm.lead"
     
-    def _get_provision_value(self, cr, uid, ids, name, arg, context=None):
-        val={}
-        for lead in self.browse(cr, uid, ids):
-            amount = 0.0
-            if lead.product_id.provision_ppiu and lead.product_id.provision_ppiu != 0.0:
-                amount = lead.value*(lead.product_id.provision_ppiu/100)
-            elif lead.partner_sale_id and lead.partner_sale_id.provision_ppiu and lead.partner_sale_id.provision_ppiu != 0.0:
-                amount = lead.value*(lead.partner_sale_id.provision_ppiu/100)
-            val[lead.id] = amount
-        return val
-    
     def _get_provision(self, cr, uid, ids, name, arg, context=None):
         val={}
         for lead in self.browse(cr, uid, ids):
@@ -34,13 +23,32 @@ class crm_lead(Model):
         'provision_p': fields.float('Prowizja 30% invisible', readonly=True),
         'provision': fields.function(_get_provision, type='float', string="Prowizja 30%", store=False, readonly=True),
         'value': fields.float('Wartość sprzedaży'),
-        'provision_value': fields.function(_get_provision_value, type='float', string="Prowizja PPiU", store=False, readonly=True),
+        'provision_value': fields.float('Prowizja PPiU'),
         'account_id': fields.many2one('account.invoice', 'Faktura'),
     }
     
     _defaults = {
                  'provision_p': 30.0,
                  }
+    
+    def on_change_provision_ppiu(self, cr, uid, ids, product_id, partner_sale_id, amount, context=None):
+        vals = {}
+        if product_id and partner_sale_id and amount and amount != 0:
+            vals['provision_value'] = self.get_provision_ppiu(cr, uid, product_id, partner_sale_id, amount)
+        else:
+            vals['provision_value'] = 0.0
+        
+        return {'value': vals}
+    
+    def get_provision_ppiu(self, cr, uid, product_id, partner_sale_id, value):
+        product = self.pool.get('ppiu.product').browse(cr, uid, product_id)
+        partner_sale = self.pool.get('res.partner').browse(cr, uid, partner_sale_id)
+        amount = 0.0
+        if product.provision_ppiu and product.provision_ppiu != 0.0:
+            amount = value*(product.provision_ppiu/100)
+        elif partner_sale.provision_ppiu and partner_sale.provision_ppiu != 0.0:
+            amount = value*(partner_sale.provision_ppiu/100)
+        return amount
     
     def get_payment(self, cr, uid, ids, context=None):
         lead = self.browse(cr, uid, ids[0])

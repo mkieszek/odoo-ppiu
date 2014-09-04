@@ -297,6 +297,15 @@
             <field name="groups" eval="[(4, ref('group_ppiu_invoice_read_partner'))]"/>
         </record>
         
+        <act_window name="Zmień status"
+		    res_model="ppiu.payment.change.stage"
+		    src_model="ppiu.payment"
+		    key2="client_action_multi" 
+		    view_mode="form" target="new" 
+		    view_type="form"
+		    groups="group_ppiu_administration"
+		    id="ppiu_action_payment_change_stage" />
+        
         <!-- Zmiany menu -->
         <menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" groups="group_ppiu_struct_partner_recomended_visible" />
 		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" groups="group_ppiu_partner_recomended_visible" />
