@@ -9,7 +9,7 @@
 		<menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" />
 		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" />
 		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" />
-		<menuitem name="Produkty" id="menu_ppiu_products" parent="menu_ppiu_platform_platform" action="action_ppiu_product" sequence="14"/>
+		<menuitem name="Produkty i usługi" id="menu_ppiu_products" parent="menu_ppiu_platform_platform" action="action_ppiu_product" sequence="14"/>
 		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="15" />
 		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="16" />
 		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="18"/>

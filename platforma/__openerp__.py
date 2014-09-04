@@ -43,6 +43,7 @@
                     'view/crm_lead_view.xml',
                     'view/account_invoice_view.xml',
                     'wizard/ppiu_lead2invoice_view.xml',
+                    'wizard/ppiu_payment_change_stage_view.xml',
                     
                     'view/ppiu_menu.xml',
                     ],

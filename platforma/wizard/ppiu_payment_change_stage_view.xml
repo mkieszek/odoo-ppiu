@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="ppiu_payment_change_stage" model="ir.ui.view">
+            <field name="name">ppiu.payment.change.stage</field>
+            <field name="model">ppiu.payment.change.stage</field>
+            <field name="arch" type="xml">
+                <form string="Wypłaty" version="7.0">
+                	<h1>Wybrane wypłaty</h1>
+                	<field name="payment_ids" readonly="1"/>
+                    <footer>
+                        <button name="payment" string="Zapłacone" type="object" class="oe_highlight"/> 
+                        <button special="cancel" string="Anuluj" type="object" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+		<act_window name="Zmień status"
+		    res_model="ppiu.payment.change.stage"
+		    src_model="ppiu.payment"
+		    key2="client_action_multi" 
+		    view_mode="form" target="new" 
+		    view_type="form"
+		    groups="group_ppiu_administration"
+		    id="ppiu_action_payment_change_stage" />
+	</data>
+</openerp>

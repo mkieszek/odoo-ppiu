@@ -11,14 +11,14 @@ TYPE = [('consu','Pomocniczy'),('service','Usługa')]
 
 class ppiu_product(osv.Model):
     _name = "ppiu.product"
-    _description = 'Product'
+    _description = 'Products and services'
     _columns = {
-        'name': fields.char('Nazwa produktu', required=True),
-        'product_type': fields.selection(TYPE, 'Typ produktu'),
+        'name': fields.char('Nazwa produktu / usługi', required=True),
+        'product_type': fields.selection(TYPE, 'Typ'),
         'is_active': fields.boolean('Aktywny'),
         'points': fields.selection(POINTS, 'Punktacja', required=True),
         'partner_sale_id': fields.many2one('res.partner', 'Partner Handlowy', domain="[('partner_sale','=',True)]", required=True),
         'description': fields.text('Opis'),
-        'product_category': fields.many2one('product.category', 'Kategoria produktu'),
+        'product_category': fields.many2one('product.category', 'Kategoria'),
         'provision_ppiu': fields.float('Prowizja ze sprzedaży %', groups="platforma.group_ppiu_administration"),
     }

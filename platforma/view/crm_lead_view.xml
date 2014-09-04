@@ -29,8 +29,8 @@
 					<field name="sale_date" />
 					<field name="value" />
 					<field name="provision_value" />
-					<field name="provision_p" invisible="1"/>
-					<field name="provision" />
+					<field name="provision_p" invisible="1" />
+					<field name="provision" invisible="1" />
 		        </xpath>
 		        <xpath expr="/form/sheet/notebook" position="inside">
 					<page string="Wypłaty" groups="platforma.group_ppiu_administration,platforma.group_ppiu_partner_recomend">
@@ -53,7 +53,7 @@
         	<field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
 			<field name="arch" type="xml">
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
-		            <field name="user_id" string="Partner rekomendowany" />
+		            <field name="user_id" string="Partner rekomendujący" />
 		        </xpath>
 			</field>
         </record>
@@ -72,7 +72,7 @@
             		<field name="value" />
             	</xpath>
             	<xpath expr="/tree/field[@name='user_id']" position="replace" >
-            		<field name="user_id" string="Partner rekomendowany" />
+            		<field name="user_id" string="Partner rekomendujący" />
             		<field name="partner_sale_id" />
 		            <field name="account_id" />
             	</xpath>
@@ -89,6 +89,13 @@
 		        </xpath>
             </field>
         </record>
+        
+        <record model="ir.actions.act_window" id="crm.crm_case_category_act_leads_all">
+        <field name="context">{
+                'search_default_unassigned':0,
+            }
+        </field>
+    </record>
 		
     </data>
 </openerp>

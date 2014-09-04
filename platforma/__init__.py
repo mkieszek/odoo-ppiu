@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import ppiu_sale_points
 import res_partner
+import res_users
 import ppiu_payment
 import crm_lead
 import ppiu_product

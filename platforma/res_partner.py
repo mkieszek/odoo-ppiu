@@ -77,6 +77,11 @@ class res_partner(Model):
         'ppiu_child_ids': fields.one2many('res.partner', 'ppiu_parent_id', string="Partnerzy podrzędni"),
     }
     
+    def create(self, cr, uid, data, context=None):
+        partner_id = super(res_partner, self).create(cr, uid, data, context=context)
+        
+        return partner_id
+    
     def get_parent_ids(self, cr, uid, partner_id):
         parent_ids = []
         partner = self.browse(cr, uid, partner_id)
