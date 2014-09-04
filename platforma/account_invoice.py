@@ -13,7 +13,6 @@ class account_invoice(osv.osv):
     
     def create(self, cr, uid, vals, context=None):
         invoice_id = super(account_invoice, self).create(cr, uid, vals, context=context)
-        pdb.set_trace()
         lead_obj = self.pool.get('crm.lead')
         if 'lead_ids' in context:
             vals_lead = {

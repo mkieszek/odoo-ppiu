@@ -34,11 +34,9 @@ class ppiu_lead2invoice(osv.osv_memory):
             raise osv.except_osv(decode('Ostrzeżenie'), decode('Nie wybrano właściwych szans'))
         
         invoice_lines = []
-        pdb.set_trace()
         for lead in lead_obj.browse(cr, uid, context['lead_ids']):
             if lead.partner_sale_id:
                 context['default_partner_id'] = lead.partner_sale_id.id
-                #context['default_invoice_line'] = [[0, False, {'name': 'cod'}]]
             invoice_line = {
                             'name': lead.name,
                             'ppiu_product_id': lead.product_id.id,
@@ -48,24 +46,6 @@ class ppiu_lead2invoice(osv.osv_memory):
             
         if 'default_partner_id' in context:
             context['default_invoice_line'] = invoice_lines
-                
-        """
-        'invoice_line': [[0,
-                   False,
-                   {'account_analytic_id': False,
-                    'account_id': 266,
-                    'discount': 0,
-                    'invoice_id': 1,
-                    'invoice_line_gross': 0,
-                    'invoice_line_tax': 0,
-                    'invoice_line_tax_id': [[6, False, []]],
-                    'name': 'cos',
-                    'ppiu_product_id': 1,
-                    'price_unit': 15,
-                    'product_id': False,
-                    'quantity': 1,
-                    'uos_id': False}]],
-        """
                 
         ir_model_data = self.pool.get('ir.model.data')
         form_res = ir_model_data.get_object_reference(cr, uid, 'account', 'invoice_form')
