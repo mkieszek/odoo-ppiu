@@ -296,6 +296,18 @@
 		    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
             <field name="groups" eval="[(4, ref('group_ppiu_invoice_read_partner'))]"/>
         </record>
+        <record id="ppiu_res_partner_read_customers" model="ir.rule">
+            <field name="name">Rule Read only customers</field>
+            <field ref="model_res_partner" name="model_id"/>
+		    <field name="domain_force">['|',('customer','=',True),('id','=',user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ppiu_partner_sale'))]"/>
+        </record>
+        <record id="ppiu_res_partner_read_customers_recomend" model="ir.rule">
+            <field name="name">Rule Read only customers and recomend</field>
+            <field ref="model_res_partner" name="model_id"/>
+		    <field name="domain_force">['|',('customer','=',True),'|',('id','=',user.partner_id.id),('partner_recomend','=',True)]</field>
+            <field name="groups" eval="[(4, ref('group_ppiu_partner_recomend'))]"/>
+        </record>
         
         <act_window name="Zmień status"
 		    res_model="ppiu.payment.change.stage"
@@ -307,11 +319,12 @@
 		    id="ppiu_action_payment_change_stage" />
         
         <!-- Zmiany menu -->
+		<menuitem name="Partnerzy" id="menu_ppiu_customers_partners" parent="menu_ppiu_platform_platform" action="action_ppiu_customers_partners_form" sequence="14" groups="group_ppiu_administration"/>
         <menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" groups="group_ppiu_struct_partner_recomended_visible" />
 		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" groups="group_ppiu_partner_recomended_visible" />
 		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" groups="group_ppiu_partner_sale_visible" />
-		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="15" groups="group_ppiu_lead_visible" />
-		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="16" groups="group_ppiu_oppor_visible" />
+		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="16" groups="group_ppiu_lead_visible" />
+		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="17" groups="group_ppiu_oppor_visible" />
 		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="18" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
 		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="19" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
     </data>

@@ -52,8 +52,14 @@
 			<field name="model">crm.lead</field>
         	<field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
 			<field name="arch" type="xml">
+				<xpath expr="/form/header/button[@string='Convert to Opportunity']" position="attributes">
+		            <attribute name="groups">platforma.group_ppiu_administration</attribute>
+		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
 		            <field name="user_id" string="Partner rekomendujący" />
+		        </xpath>
+		        <xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
+		            <attribute name="domain">[('customer','=',True)]</attribute>
 		        </xpath>
 			</field>
         </record>
