@@ -26,10 +26,11 @@ class res_partner(Model):
             point = points_obj.browse(cr, uid, points_ids[0])
             provision_p = point.provision
         else:
-            points_ids = points_obj.search(cr, uid, [])[-1]
-            point = points_obj.browse(cr, uid, points_ids)
-            if point.points_to < points:
-                provision_p = point.provision
+            points_ids = points_obj.search(cr, uid, [])
+            if points_ids:
+                point = points_obj.browse(cr, uid, points_ids[-1])
+                if point.points_to < points:
+                    provision_p = point.provision
         return provision_p
     
     def _get_access_partner(self, cr, uid, ids, name, arg, context=None):
