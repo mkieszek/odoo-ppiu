@@ -22,3 +22,7 @@ access_ppiu_res_partner_create,ppiu.res.partner.create,base.model_res_partner,gr
 access_ppiu_res_partner_unlink,ppiu.res.partner.unlink,base.model_res_partner,group_ppiu_res_partner_unlink,0,0,0,1
 access_ppiu_crm_phonecall,ppiu.crm.phonecall,crm.model_crm_phonecall,group_ppiu_res_partner_read,1,1,1,0
 access_ppiu_account_move_line,ppiu.account_move_line,account.model_account_move_line,group_ppiu_res_partner_read,1,0,0,0
+access_ppiu_product_category_read,ppiu.product.category.read,product.model_product_category,group_ppiu_product_category_read,1,0,0,0
+access_ppiu_product_category_write,ppiu.product.category.write,product.model_product_category,group_ppiu_product_category_write,0,1,0,0
+access_ppiu_product_category_create,ppiu.product.category.create,product.model_product_category,group_ppiu_product_category_create,0,0,1,0
+access_ppiu_product_category_unlink,ppiu.product.category.unlink,product.model_product_category,group_ppiu_product_category_unlink,0,0,0,1

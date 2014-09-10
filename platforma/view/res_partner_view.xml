@@ -53,7 +53,6 @@
                                 </ul>
                             </div>
                         </div>
-
                     </t>
                 </templates>
             </kanban>
@@ -103,6 +102,7 @@
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <search string="Search Partner">
+                   <field name="id" invisible='1'/>
                    <field name="name"
                        filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
                    <filter help="My Partners" icon="terp-personal+" domain="[('user_id','=',uid)]"/>
@@ -214,6 +214,7 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <tree string="Contacts" create="false">
+            	<field name="id" invisible="1" />
                 <field name="display_name"/>
                 <field name="phone"/>
                 <field name="email"/>
@@ -228,9 +229,10 @@
 	    <field name="res_model">res.partner</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
-	    <field name="context">{'default_customer': False,'default_partner_recomend': True,'search_default_id':active_id}</field>
+	    <field name="context">{'default_customer': False,'default_partner_recomend': True,'id':active_id,'search_default_id':active_id}</field>
+        <!-- <field name="context">{'categ_id':active_id, 'search_default_categ_id':active_id}</field> -->
 	    <field name="domain">[('partner_recomend','=',True),('access_partner','=',True)]</field>  
-        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="search_view_id" ref="view_res_partner_filter"/>
         <field name="view_id" ref="view_ppiu_partner_list"/>
 	</record>
 	
@@ -239,7 +241,6 @@
          <field eval="'res.partner'" name="model"/>
          <field name="name">Partnerzy</field>
          <field eval="'ir.actions.act_window,%d'%action_ppiu_partner_list2" name="value"/>
-		 <field name="object" eval="True"/>
      </record>
       
 </data>

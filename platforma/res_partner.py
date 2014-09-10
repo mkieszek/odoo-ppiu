@@ -20,9 +20,16 @@ class res_partner(Model):
         points_obj = self.pool.get('ppiu.sale.points')
         partner =  self.browse(cr, uid, partner_id)
         points = partner.sum_points
+        provision_p = 0
         points_ids = points_obj.search(cr, uid, [('points_from','<=',points),('points_to','>=',points)])
-        point = points_obj.browse(cr, uid, points_ids)
-        provision_p = point.provision
+        if points_ids:
+            point = points_obj.browse(cr, uid, points_ids[0])
+            provision_p = point.provision
+        else:
+            points_ids = points_obj.search(cr, uid, [])[-1]
+            point = points_obj.browse(cr, uid, points_ids)
+            if point.points_to < points:
+                provision_p = point.provision
         return provision_p
     
     def _get_access_partner(self, cr, uid, ids, name, arg, context=None):

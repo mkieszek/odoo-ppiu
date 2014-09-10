@@ -140,6 +140,12 @@
             <field name="category_id" ref="module_category_ppiu"/>
 			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_read'))]"/>
         </record>
+        <record id="group_ppiu_oppor_tree_visible" model="res.groups">
+            <field name="name">Opportunities Tree Visible</field>
+            <field name="comment">Opportunities Tree Visible</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_lead_read'))]"/>
+        </record>
         <record id="group_ppiu_oppor_read_partner" model="res.groups">
             <field name="name">Opportunities Read Partner</field>
             <field name="comment">Opportunities Read Partner</field>
@@ -202,6 +208,30 @@
             <field name="category_id" ref="module_category_ppiu"/>
 			<field name="implied_ids" eval="[(4, ref('group_ppiu_product_write'))]"/>
         </record>
+        <!-- Kategorie produktów -->
+        <record id="group_ppiu_product_category_read" model="res.groups">
+            <field name="name">Product Category Read</field>
+            <field name="comment">Product Category Read</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+        </record>
+        <record id="group_ppiu_product_category_write" model="res.groups">
+            <field name="name">Product Category Write</field>
+            <field name="comment">Product Category Write</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_product_category_read'))]"/>
+        </record>
+        <record id="group_ppiu_product_category_create" model="res.groups">
+            <field name="name">Product Category Create</field>
+            <field name="comment">Product Category Create</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_product_category_write'))]"/>
+        </record>
+        <record id="group_ppiu_product_category_unlink" model="res.groups">
+            <field name="name">Product Category Unlink</field>
+            <field name="comment">Product Category Unlink</field>
+            <field name="category_id" ref="module_category_ppiu"/>
+			<field name="implied_ids" eval="[(4, ref('group_ppiu_product_category_write'))]"/>
+        </record>
         <!-- Faktury -->
         <record id="group_ppiu_invoice_read_partner" model="res.groups">
             <field name="name">Invoice Read Partner</field>
@@ -228,7 +258,9 @@
 											(4, ref('group_ppiu_lead_visible')),
 											(4, ref('group_ppiu_struct_partner_recomended_visible')),
 											(4, ref('group_ppiu_partner_recomended_visible')),
-											(4, ref('group_ppiu_partner_sale_visible'))]"/>
+											(4, ref('group_ppiu_partner_sale_visible')),
+											(4, ref('group_ppiu_product_category_create')),
+											(4, ref('group_ppiu_product_category_unlink'))]"/>
         </record>
         
         <record id="group_ppiu_partner_recomend" model="res.groups">
@@ -240,10 +272,12 @@
 											(4, ref('group_ppiu_payment_read_partner')),
 											(4, ref('group_ppiu_res_partner_read')),
 											(4, ref('group_ppiu_product_read')),
+											(4, ref('group_ppiu_product_category_read')),
 											(4, ref('group_ppiu_sale_points_read')),
 											(4, ref('group_ppiu_struct_partner_recomended_visible')),
 											(4, ref('group_ppiu_partner_read_partner')),
-											(4, ref('group_ppiu_partner_recomended_visible'))]"/>
+											(4, ref('group_ppiu_partner_recomended_visible')),
+											(4, ref('group_ppiu_oppor_tree_visible'))]"/>
         </record>
         
         <record id="group_ppiu_partner_sale" model="res.groups">
@@ -253,6 +287,7 @@
             <field name="implied_ids" eval="[(4, ref('group_ppiu_oppor_read_partner')),
 											(4, ref('group_ppiu_oppor_read_partner_sale')),
 											(4, ref('group_ppiu_product_read')),
+											(4, ref('group_ppiu_product_category_read')),
 											(4, ref('group_ppiu_partner_read_partner')),
 											(4, ref('group_ppiu_invoice_read_partner')),
 											(4, ref('group_ppiu_sale_points_read')),
@@ -323,9 +358,12 @@
         <menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" groups="group_ppiu_struct_partner_recomended_visible" />
 		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" groups="group_ppiu_partner_recomended_visible" />
 		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" groups="group_ppiu_partner_sale_visible" />
-		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="16" groups="group_ppiu_lead_visible" />
-		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="17" groups="group_ppiu_oppor_visible" />
-		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="18" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
-		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="19" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		<menuitem name="Kategorie produktów i usług" id="menu_ppiu_products_category" parent="menu_ppiu_platform_platform" action="product.product_category_action_form" sequence="16" groups="group_ppiu_administration" />
+		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="17" groups="group_ppiu_lead_visible" />
+		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="18" groups="group_ppiu_oppor_visible" />
+		<menuitem name="Lista szans" id="menu_ppiu_oppor_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_oppor_tree" sequence="19" groups="group_ppiu_oppor_tree_visible" />
+		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="20" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="21" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		
     </data>
 </openerp>
