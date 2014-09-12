@@ -6,13 +6,20 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account_invoice_pl_og.view_account_pl_invoice_form"/>
         <field name="arch" type="xml">
+        	<xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="replace">
+        		<field string="Klient" name="partner_id"
+                       on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, partner_bank_id, company_id, context)"
+                       context="{'search_default_customer':1, 'show_address': 1}"
+                       options='{"always_reload": True}'
+                       domain="[('customer', '=', True)]"/>
+	        </xpath>
            	<xpath expr="/form/sheet/notebook" position="inside">
            		<page string="Szanse">
 	           		<field name="lead_ids" readonly="1">
 	           			<tree>
-	           				<field name="name" />
-	           				<field name="user_id" />
-	           				<field name="stage_id" />
+	           				<field name="name" strint="Temat"/>
+	           				<field name="user_id" string="Partner rekomendujący"/>
+	           				<field name="stage_id" string="Status"/>
 	           			</tree>
 	           		</field>
            		</page>
@@ -28,14 +35,44 @@
         	<xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="attributes">
            		<attribute name="domain">[]</attribute>
 	        </xpath>
-	        <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
+	        <!-- <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
 	        	<attribute name="invisible">1</attribute>
 	        </xpath>
 	        
 	        <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='product_id']" position="before">
 				<field name="ppiu_product_id" />
-	        </xpath>
+	        </xpath> -->
         </field>
     </record>
+    <!-- 
+    <record id="ppiu_invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.tree</field>
+        <field name="model">account.invoice</field>
+    	<field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//tree/field[@name='partner_id']" position="replace">
+           		<field name="partner_id" string="Klient" />
+	        </xpath>
+            <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice">
+                <field name="partner_id" groups="base.group_user"/>
+                <field name="commercial_partner_id" invisible="1"/>
+                <field name="date_invoice"/>
+                <field name="number"/>
+                <field name="reference" invisible="1"/>
+                <field name="name" invisible="1"/>
+                <field name="journal_id" invisible="1"/>
+                <field name="period_id" invisible="1" groups="account.group_account_user"/>
+                <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                <field name="user_id" string="Odpowiedzialny"/>
+                <field name="date_due"/>
+                <field name="origin"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="residual" sum="Residual Amount"/>
+                <field name="amount_untaxed" sum="Untaxed Amount"/>
+                <field name="amount_total" sum="Total Amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record> -->
 </data>
 </openerp>

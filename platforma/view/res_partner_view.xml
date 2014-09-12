@@ -72,10 +72,6 @@
 	            <field name="partner_sale" />
 	        </xpath>
 	        
-            <xpath expr="/form/sheet/div/field[@name='parent_id']" position="attributes">
-				<attribute name="attrs">{}</attribute>
-	        </xpath>
-	        
             <xpath expr="/form/sheet/notebook" position="inside">
             	<page string="Platforma" attrs="{'invisible':[('partner_sale','=',False),'|',('partner_recomend','=',False),('access_partner','=',True)]}">
 					<group col="2">
@@ -89,11 +85,8 @@
 						</group>
 					</group>
 				</page>
-				<!-- <page string="Partnerzy podrzędni" attrs="{'invisible':[('partner_recomend','=',False)]}">
-					<field name="ppiu_child_ids" readonly="1"/>
-				</page> -->
 	        </xpath>
-	        <xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="replace" />
+	        <!-- <xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="replace" /> -->
         </field>
     </record>
     
@@ -134,6 +127,7 @@
         <field name="context">{}</field>
         <field name="domain">[('customer','=',True)]</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
+	    <field name="view_id" ref="base.res_partner_kanban_view"/>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
             Click to add a contact in your address book.

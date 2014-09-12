@@ -20,7 +20,7 @@
 								<field name="is_active" />
 							</group>
 							<group string="Szczegóły handlowe">
-								<field name="partner_sale_id" />
+								<field name="partner_sale_id" widget="selection"/>
 								<field name="points" />
 								<field name="provision_ppiu" />
 							</group>

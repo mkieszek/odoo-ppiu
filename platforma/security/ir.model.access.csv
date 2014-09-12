@@ -26,3 +26,7 @@ access_ppiu_product_category_read,ppiu.product.category.read,product.model_produ
 access_ppiu_product_category_write,ppiu.product.category.write,product.model_product_category,group_ppiu_product_category_write,0,1,0,0
 access_ppiu_product_category_create,ppiu.product.category.create,product.model_product_category,group_ppiu_product_category_create,0,0,1,0
 access_ppiu_product_category_unlink,ppiu.product.category.unlink,product.model_product_category,group_ppiu_product_category_unlink,0,0,0,1
+access_product_product_read,product.product.read,product.model_product_product,group_ppiu_product_read,1,0,0,0
+access_product_product_write,product.product.write,product.model_product_product,group_ppiu_product_write,0,1,0,0
+access_product_product_create,product.product.create,product.model_product_product,group_ppiu_product_create,0,0,1,0
+access_product_product_unlink,product.product.unlink,product.model_product_product,group_ppiu_product_unlink,0,0,0,1

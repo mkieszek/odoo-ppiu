@@ -14,5 +14,5 @@ class ppiu_sale_points(osv.Model):
     'provision': fields.float('Prowizja %', required=True),
     'provision_national': fields.float('Prowizja od runku krajowego %', required=True),
     'part_profit': fields.float('Udział w zysku %', required=True),
-    'provision_other': fields.float('Prowizja od innych rynktów', required=True), 
+    'provision_other': fields.float('Prowizja od innych rynktów %', required=True), 
     }

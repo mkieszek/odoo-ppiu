@@ -16,10 +16,10 @@
 		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
 		            <field name="user_id" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]" />
-		            <field name="partner_sale_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
+		            <field name="partner_sale_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" widget="selection" />
 		        </xpath>
                 <xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
-		            <field name="recom_partner_id" />
+		            <field name="recom_partner_id" widget="selection" />
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
 		        	<attribute name="domain">[('customer','=',True)]</attribute>
@@ -56,7 +56,7 @@
 		            <attribute name="groups">platforma.group_ppiu_administration</attribute>
 		        </xpath>
             	<xpath expr="/form/sheet/group/group/field[@name='user_id']" position="replace">
-		            <field name="user_id" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]"/>
+		            <field name="user_id" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]" />
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
 		            <attribute name="domain">[('customer','=',True)]</attribute>
@@ -91,7 +91,7 @@
         	<field name="inherit_id" ref="crm.view_crm_lead2opportunity_partner"/>
             <field name="arch" type="xml">
             	<xpath expr="/form/group/field[@name='user_id']" position="replace">
-		            <field name="user_id" class="oe_inline" on_change="on_change_user(user_id, section_id, context)" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]" />
+		            <field name="user_id" class="oe_inline" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]" />
 		        </xpath>
             </field>
         </record>

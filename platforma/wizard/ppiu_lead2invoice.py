@@ -38,9 +38,10 @@ class ppiu_lead2invoice(osv.osv_memory):
             if lead.partner_sale_id:
                 context['default_partner_id'] = lead.partner_sale_id.id
             invoice_line = {
+                            'product_id': 1,
                             'name': lead.name,
                             'ppiu_product_id': lead.product_id.id,
-                            'price_unit': lead.provision
+                            'price_unit': lead.provision_value
                             }
             invoice_lines.append([0, False, invoice_line])
             

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
     <!-- Dodanie kategorii uprawnień -->
         <record model="ir.module.category" id="module_category_ppiu_access">
             <field name="name">Platforma produktów i usług - uprawnienia</field>
@@ -358,12 +358,13 @@
         <menuitem name="Struktura partnerów rekomendujących" id="menu_ppiu_partners_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_tree" sequence="11" groups="group_ppiu_struct_partner_recomended_visible" />
 		<menuitem name="Partnerzy rekomendujący" id="menu_ppiu_partners_list" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_list" sequence="12" groups="group_ppiu_partner_recomended_visible" />
 		<menuitem name="Partnerzy handlowi" id="menu_ppiu_partner_sale" parent="menu_ppiu_platform_platform" action="action_ppiu_partner_sale" sequence="13" groups="group_ppiu_partner_sale_visible" />
-		<menuitem name="Kategorie produktów i usług" id="menu_ppiu_products_category" parent="menu_ppiu_platform_platform" action="product.product_category_action_form" sequence="16" groups="group_ppiu_administration" />
-		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="17" groups="group_ppiu_lead_visible" />
-		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="18" groups="group_ppiu_oppor_visible" />
-		<menuitem name="Lista szans" id="menu_ppiu_oppor_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_oppor_tree" sequence="19" groups="group_ppiu_oppor_tree_visible" />
-		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="20" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
-		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="21" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		<menuitem name="Produkty" id="menu_ppiu_product" parent="menu_ppiu_platform_platform" action="product.product_template_action" sequence="15" groups="group_ppiu_administration"/>
+		<menuitem name="Kategorie produktów i usług" id="menu_ppiu_products_category" parent="menu_ppiu_platform_platform" action="product.product_category_action_form" sequence="17" groups="group_ppiu_administration" />
+		<menuitem name="Sygnały" id="menu_ppiu_leads" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_leads_all" sequence="18" groups="group_ppiu_lead_visible" />
+		<menuitem name="Szanse" id="menu_ppiu_opportunities" parent="menu_ppiu_platform_platform" action="crm.crm_case_category_act_oppor11" sequence="19" groups="group_ppiu_oppor_visible" />
+		<menuitem name="Lista szans" id="menu_ppiu_oppor_tree" parent="menu_ppiu_platform_platform" action="action_ppiu_oppor_tree" sequence="20" groups="group_ppiu_oppor_tree_visible" />
+		<menuitem name="Wypłaty" id="menu_ppiu_payment" parent="menu_ppiu_platform_platform" action="action_ppiu_payment" sequence="21" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
+		<menuitem name="Poziomy prowizyjne" id="menu_ppiu_sale_points" parent="menu_ppiu_platform_platform" action="action_ppiu_sale_points" sequence="22" groups="group_ppiu_administration,group_ppiu_partner_recomend" />
 		
     </data>
 </openerp>
