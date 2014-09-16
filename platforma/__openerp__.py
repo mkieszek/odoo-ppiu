@@ -30,7 +30,10 @@
     'depends': ['crm','product','l10n_chart_pl_2011','account_invoice_pl_og'],
     'data': ['security/security.xml',
              'security/ir.model.access.csv',
-             'view/account_invoice_workflow.xml'],
+             'view/account_invoice_workflow.xml',
+             #'view/crm_lead_workflow.xml',
+             'view/ppiu_email_template.xml'
+             ],
     'demo': [],
     'test':[],
     'installable': True,

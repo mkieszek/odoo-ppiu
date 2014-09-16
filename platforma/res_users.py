@@ -34,9 +34,9 @@ class res_users(Model):
         partner_obj = self.pool.get('res.partner')
 
         if groups_obj.search(cr, uid, [('name','=','Partner Rekomendujący')])[0] in user.groups_id:
-            partner_obj.write(cr, uid, [user.partner_id.id], {'partner_recomend':True}, context)
+            partner_obj.write(cr, uid, [user.partner_id.id], {'partner_recomend':True, 'notify_email': 'always'}, context)
             
         if groups_obj.search(cr, uid, [('name','=','Partner Handlowy')])[0] in user.groups_id:
-            partner_obj.write(cr, uid, [user.partner_id.id], {'partner_sale':True}, context)
+            partner_obj.write(cr, uid, [user.partner_id.id], {'partner_sale':True, 'notify_email': 'always'}, context)
         return user_id
     

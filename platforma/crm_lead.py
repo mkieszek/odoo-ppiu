@@ -15,7 +15,6 @@ class crm_lead(Model):
     
     _columns = {
         'partner_sale_id': fields.many2one('res.partner', 'Partner handlowy', domain="[('partner_sale','=',True)]"),
-        'recom_partner_id': fields.many2one('res.partner', 'Partner polecający', domain="[('partner_recomend','=',True)]"),
         'product_id': fields.many2one('ppiu.product', 'Produkt', domain="[('is_active','=',True)]"),
         'sequence': fields.related('stage_id', 'sequence', type='integer', string='Sequence', readonly=True),
         'payment_ids': fields.one2many('ppiu.payment', 'lead_id', 'Wypłaty'),
@@ -30,6 +29,37 @@ class crm_lead(Model):
     _defaults = {
                  'provision_p': 30.0,
                  }
+    
+    def create(self, cr, uid, data, context=None):
+        lead_id = super(crm_lead, self).create(cr, uid, data, context=context)
+        admin_ppiu_ids = []
+        user_obj = self.pool.get('res.users')
+        user_ids = user_obj.search(cr,uid,[('groups_id.name','=','Administracja'),('id','!=',1)])
+        for user in user_obj.browse(cr, uid, user_ids):
+            admin_ppiu_ids.append(user.partner_id.id)
+            
+        if admin_ppiu_ids:
+            self.message_subscribe(cr, uid, [lead_id], admin_ppiu_ids, context=context)
+            pdb.set_trace()
+            self.create_lead_email(cr, uid, lead_id, context)
+        return lead_id
+    
+    def write(self, cr, uid, ids, data, context=None):
+        lead_id = super(crm_lead, self).write(cr, uid, ids, data, context=context)
+        if 'partner_sale_id' in data and data['partner_sale_id'] and self.pool.get('res.users').browse(cr, uid, data['partner_sale_id']).email:
+            for id in ids:
+                self.partner_to_oppor_email(cr, uid, id, context)
+        return lead_id
+    
+    def create_lead_email(self, cr, uid, id, context=None):
+        template = self.pool.get('ir.model.data').get_object(cr, uid, 'platforma', 'crm_lead_create_email')
+        self.pool.get('email.template').send_mail(cr, uid, template.id, id, force_send=True, raise_exception=True, context=context)
+        return True
+    
+    def partner_to_oppor_email(self, cr, uid, id, context=None):
+        template = self.pool.get('ir.model.data').get_object(cr, uid, 'platforma', 'crm_lead_to_oppor_email')
+        self.pool.get('email.template').send_mail(cr, uid, template.id, id, force_send=True, raise_exception=True, context=context)
+        return True
     
     def on_change_provision_ppiu(self, cr, uid, ids, product_id, partner_sale_id, amount, context=None):
         vals = {}

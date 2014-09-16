@@ -10,6 +10,12 @@
             	<xpath expr="/form/sheet/group/group/label[@for='title_action']" position="before">
             		<field name="account_id" readonly="1"/>
 		        </xpath>
+		        <xpath expr="/form/header/button[@name='case_mark_won']" position="attributes">
+		        	<attribute name="groups">platforma.group_ppiu_administration</attribute>
+		        </xpath>
+		        <xpath expr="/form/header/button[@name='case_mark_lost']" position="attributes">
+		        	<attribute name="groups">platforma.group_ppiu_administration</attribute>
+		        </xpath>
             	<xpath expr="/form/header/button[@name='case_mark_lost']" position="after">
             		<field name="sequence" invisible="1" />
 					<button name="get_payment" type="object" string="Przelicz wypłaty" icon="terp-dolar" groups="platforma.group_ppiu_administration" attrs="{'invisible':['|',('sequence','!=',70),('payment_ids','!=',[])]}"/>
@@ -18,14 +24,11 @@
 		            <field name="user_id" string="Partner rekomendujący" domain="[('partner_id.partner_recomend','=',True)]" />
 		            <field name="partner_sale_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" widget="selection" />
 		        </xpath>
-                <xpath expr="/form/sheet/group/group/field[@name='user_id']" position="after">
-		            <field name="recom_partner_id" widget="selection" />
-		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='partner_id']" position="attributes">
 		        	<attribute name="domain">[('customer','=',True)]</attribute>
 		        </xpath>
 		        <xpath expr="/form/sheet/group/group/field[@name='categ_ids']" position="after">
-					<field name="product_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
+					<field name="product_id" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" domain="[('partner_sale_id','=',partner_sale_id)]"/>
 					<field name="sale_date" />
 					<field name="value" on_change="on_change_provision_ppiu(product_id,partner_sale_id,value)" />
 					<field name="provision_value" />
