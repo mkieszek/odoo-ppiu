@@ -85,9 +85,13 @@ class crm_lead(Model):
         for user in user_obj.browse(cr, uid, user_ids):
             admin_ppiu_ids.append(user.partner_id.id)
             
-        if admin_ppiu_ids:
+        if admin_ppiu_ids and data['type'] == 'lead':
             self.message_subscribe(cr, uid, [lead_id], admin_ppiu_ids, context=context)
             self.create_lead_email(cr, uid, lead_id, context)
+            
+        if 'partner_sale_id' in data and data['partner_sale_id'] and self.pool.get('res.users').browse(cr, uid, data['partner_sale_id']).email:
+            for id in ids:
+                self.partner_to_oppor_email(cr, uid, id, context)
         return lead_id
     
     def write(self, cr, uid, ids, data, context=None):
@@ -131,18 +135,18 @@ class crm_lead(Model):
         points = 5
         if lead.product_id.points != '1':
             points = round(lead.value/100)
-
+            
         if lead.user_id.partner_id and lead.user_id.partner_id != lead.partner_id and not lead.partner_id.partner_recomend:
             partner = lead.user_id.partner_id
             amount = 0.0
-            amount = lead.provision+lead.provision*(partner.provision_points/100)
-            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision, amount)
+            amount = lead.provision+lead.provision_value*(partner.provision_points/100)
+            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision_value, amount)
             
         elif lead.user_id.partner_id and lead.user_id.partner_id == lead.partner_id:
             partner = lead.user_id.partner_id
             amount = 0.0
-            amount = lead.provision+lead.provision*(partner.provision_points/100)
-            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision, amount)
+            amount = lead.provision+lead.provision_value*(partner.provision_points/100)
+            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision_value, amount)
             
         elif lead.user_id.partner_id and lead.user_id.partner_id != lead.partner_id and lead.partner_id.partner_recomend:
             payment_value = {}
@@ -156,11 +160,11 @@ class crm_lead(Model):
             self.pool.get('ppiu.payment').create(cr, uid, payment_value)
             partner = lead.user_id.partner_id
             amount = 0.0
-            amount = lead.provision*(partner.provision_points/100)
-            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision, amount)
+            amount = lead.provision_value*(partner.provision_points/100)
+            self.create_payment(cr, uid, partner.id, ids[0], points, lead.provision_value, amount)
         return True
     
-    def create_payment(self, cr, uid, partner_id, lead_id, points, provision, amount):
+    def create_payment(self, cr, uid, partner_id, lead_id, points, provision_value, amount):
         payment_obj = self.pool.get('ppiu.payment')
         partner_obj = self.pool.get('res.partner')
         partner = partner_obj.browse(cr, uid, partner_id)
@@ -177,9 +181,9 @@ class crm_lead(Model):
         partner_points = partner.sum_points + points
         partner_obj.write(cr, uid, [partner.id], {'sum_points': partner_points})
         
-        if partner.parent_id:
+        if partner.ppiu_parent_id:
             amount = 0.0
-            amount = provision*((partner.parent_id.provision_points-partner_obj._get_provision_p(cr, uid, partner.id, partner.sum_points-points))/100)
-            parent_ids = self.create_payment(cr, uid, partner.parent_id.id, lead_id, points, provision, amount)
+            amount = provision_value*((partner.ppiu_parent_id.provision_points-partner_obj._get_provision_p(cr, uid, partner.id, partner.sum_points-points))/100)
+            parent_ids = self.create_payment(cr, uid, partner.ppiu_parent_id.id, lead_id, points, provision_value, amount)
             
         
