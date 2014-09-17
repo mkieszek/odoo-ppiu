@@ -30,3 +30,8 @@ access_product_product_read,product.product.read,product.model_product_product,g
 access_product_product_write,product.product.write,product.model_product_product,group_ppiu_product_write,0,1,0,0
 access_product_product_create,product.product.create,product.model_product_product,group_ppiu_product_create,0,0,1,0
 access_product_product_unlink,product.product.unlink,product.model_product_product,group_ppiu_product_unlink,0,0,0,1
+access_product_template_read,product.template.read,product.model_product_template,group_ppiu_product_read,1,0,0,0
+access_product_template_write,product.template.write,product.model_product_template,group_ppiu_product_write,0,1,0,0
+access_product_template_create,product.template.create,product.model_product_template,group_ppiu_product_create,0,0,1,0
+access_product_template_unlink,product.template.unlink,product.model_product_template,group_ppiu_product_unlink,0,0,0,1
+access_product_price_history,product.price.history,product.model_product_price_history,base.group_user,1,1,1,1
