@@ -2,6 +2,10 @@
 
 from openerp.osv.orm import Model
 from openerp.osv import fields, osv
+from datetime import datetime, timedelta
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.http import request
+import pytz
 import pdb
 
 class crm_lead(Model):
@@ -12,6 +16,48 @@ class crm_lead(Model):
         for lead in self.browse(cr, uid, ids):
             val[lead.id] = lead.provision_value*(lead.provision_p/100)
         return val
+    
+    def _get_str_partner_ids(self, cr, uid, ids, name, arg, context=None):
+        val={}
+        user_obj = self.pool.get('res.users')
+        user_ids = user_obj.search(cr,uid,[('groups_id.name','=','Administracja'),('id','!=',1)])
+        for lead in self.browse(cr, uid, ids):
+            val[lead.id] = (''.join(str(user.partner_id.id)+',' for user in user_obj.browse(cr, uid ,user_ids)))[:-1]
+        return val
+    
+    def get_date_formats(self, cr, uid, context):
+        lang = context.get("lang")
+        res_lang = self.pool.get('res.lang')
+        lang_params = {}
+        if lang:
+            ids = res_lang.search(request.cr, uid, [("code", "=", lang)])
+            if ids:
+                lang_params = res_lang.read(request.cr, uid, ids[0], ["date_format", "time_format"])
+        format_date = lang_params.get("date_format", '%B-%d-%Y')
+        format_time = lang_params.get("time_format", '%I-%M %p')
+        return (format_date, format_time)
+    
+    def get_interval(self, cr, uid, ids, date, interval, tz=None, context=None):
+        #Function used only in calendar_event_data.xml for email template
+        date = datetime.strptime(date.split('.')[0], DEFAULT_SERVER_DATETIME_FORMAT)
+
+        if tz:
+            timezone = pytz.timezone(tz or 'UTC')
+            date = date.replace(tzinfo=pytz.timezone('UTC')).astimezone(timezone)
+
+        if interval == 'day':
+            res = str(date.day)
+        elif interval == 'month':
+            res = date.strftime('%B') + " " + str(date.year)
+        elif interval == 'dayname':
+            res = date.strftime('%A')
+        elif interval == 'time':
+            dummy, format_time = self.get_date_formats(cr, uid, context=context)
+            res = date.strftime(format_time + " %Z")
+        elif interval == 'datetime':
+            dummy, format_time = self.get_date_formats(cr, uid, context=context)
+            res = date.strftime(dummy)+' '+date.strftime(format_time)
+        return res
     
     _columns = {
         'partner_sale_id': fields.many2one('res.partner', 'Partner handlowy', domain="[('partner_sale','=',True)]"),
@@ -24,6 +70,7 @@ class crm_lead(Model):
         'value': fields.float('Wartość sprzedaży'),
         'provision_value': fields.float('Prowizja PPiU'),
         'account_id': fields.many2one('account.invoice', 'Faktura'),
+        'str_partner_ids': fields.function(_get_str_partner_ids, type='char', string="Partners", store=False, readonly=True),
     }
     
     _defaults = {
@@ -40,7 +87,6 @@ class crm_lead(Model):
             
         if admin_ppiu_ids:
             self.message_subscribe(cr, uid, [lead_id], admin_ppiu_ids, context=context)
-            pdb.set_trace()
             self.create_lead_email(cr, uid, lead_id, context)
         return lead_id
     

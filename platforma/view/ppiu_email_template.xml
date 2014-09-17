@@ -6,23 +6,64 @@
             <field name="name">Create CRM Lead</field>
             <field name="model_id" ref="model_crm_lead"/>
             <field name="email_from"><![CDATA[${object.create_uid.partner_id.name}<${object.create_uid.partner_id.email}>]]></field>
-            <!-- <field name="email_to"><![CDATA[salesman1@viait.pl]]></field> -->
-            <field name="partner_to"><![CDATA[${object.message_follower_ids}]]></field>
+            <field name="partner_to"><![CDATA[${object.str_partner_ids}]]></field>
             <field name="subject"><![CDATA[Odoo - Utworzono nowy sygnał]]></field>
             <field name="body_html">
                 <![CDATA[
-                	<p>
-                		Temat: ${object.name}
-                	</p>
-                	<p>
-                		Utworzył/a szansę: ${object.create_uid.partner_id.name}
-                	</p>
-                	<p>
-                		Klient: ${object.partner_id.name or ''}
-                	</p>
-                	<p>
-                		Partner Rekomendujący: ${object.user_id.name}
-                	</p>
+                	<div>
+                		<b>Utworzono nowy sygnał.</b>
+                	</div>
+                	<div>
+                		<b>Temat: ${object.name}</b>
+                	</div>
+                	<div>
+                		Utworzy przez: ${object.create_uid.partner_id.name}
+                	</div>
+                	<div>
+                		Data utworzenia: ${object.get_interval(object.create_date, 'datetime', tz=object.create_uid.tz) or ''}
+                	</div>
+                	<div>
+                		% if object.partner_name:
+                			<div>
+                				Klient: ${object.partner_name}
+                				% if object.street or object.street2 or object.city or object.state_id or object.zip or object.country_id:
+                					<div>
+                						Adres klienta:
+                					</div>
+                					<div style='margin-left: 30px;'>
+	               						% if object.street:
+	                						<div>
+	                							${object.street}
+	                						</div>
+	                					% endif
+	                					% if object.street2:
+	                						<div>
+	                							${object.street2}
+	                						</div>
+	                					% endif
+	                					% if object.city or object.state_id or object.zip:
+	                						<div>
+	                							% if object.city:
+	                								${object.city}
+	                							% endif
+	                							% if object.state_id:
+	                								${object.state_id.name}
+	                							% endif
+	                							% if object.zip:
+	                								${object.zip}
+	                							% endif
+	                						</div>
+	                					% endif
+	                					% if object.country_id:
+	                						<div>
+	                							${object.country_id.name}
+	                						</div>
+	                					% endif
+	                				</div>
+                				% endif
+               				</div>
+           				% endif
+                	</div><br/>
                 ]]>
             </field>
         </record>
@@ -32,21 +73,65 @@
             <field name="name">Lead to Opportinities</field>
             <field name="model_id" ref="model_crm_lead"/>
             <field name="email_from"><![CDATA[${object.create_uid.partner_id.name}<${object.create_uid.partner_id.email}>]]></field>
-            <field name="email_to"><![CDATA[${object.partner_sale_id.email}]]></field>
+            <!-- <field name="email_to"><![CDATA[${object.partner_sale_id.email}]]></field> -->
+            <field name="partner_to"><![CDATA[${object.partner_sale_id.id}]]></field>
             <field name="subject"><![CDATA[Odoo - Zostałeś przypisany do szansy]]></field>
             <field name="body_html">
                 <![CDATA[
-                	<p>
-                		Temat: ${object.name}
-                	</p>
-                	<p>
-                		Utworzył/a szansę: ${object.create_uid.partner_id.name}
-                	<p>
-                		Klient: ${object.partner_id.name or ''}
-                	</p>
-                	<p>
-                		Partner Rekomendujący: ${object.user_id.name}
-                	</p>
+                	<div>
+                		<b>Zostałeś przypisany do szansy.</b>
+                	</div>
+                	<div>
+                		<b>Temat: ${object.name}</b>
+                	</div>
+                	<div>
+                		Przypisany przez: ${object.write_uid.partner_id.name}
+                	</div>
+                	<div>
+                		Data przypisania: ${object.get_interval(object.write_date, 'datetime', tz=object.partner_sale_id.tz) or ''}
+                	</div>
+                	<div>
+                		% if object.partner_id:
+                			<div>
+                				Klient: ${object.partner_name}
+                				% if object.partner_id.street or object.partner_id.street2 or object.partner_id.city or object.partner_id.state_id or object.partner_id.zip or object.partner_id.country_id:
+                					<div>
+                						Adres klienta:
+                					</div>
+                					<div style='margin-left: 30px;'>
+	               						% if object.partner_id.street:
+	                						<div>
+	                							${object.partner_id.street}
+	                						</div>
+	                					% endif
+	                					% if object.partner_id.street2:
+	                						<div>
+	                							${object.partner_id.street2}
+	                						</div>
+	                					% endif
+	                					% if object.partner_id.city or object.partner_id.state_id or object.partner_id.zip:
+	                						<div>
+	                							% if object.partner_id.city:
+	                								${object.partner_id.city}
+	                							% endif
+	                							% if object.partner_id.state_id:
+	                								${object.partner_id.state_id.name}
+	                							% endif
+	                							% if object.partner_id.zip:
+	                								${object.partner_id.zip}
+	                							% endif
+	                						</div>
+	                					% endif
+	                					% if object.partner_id.country_id:
+	                						<div>
+	                							${object.partner_id.country_id.name}
+	                						</div>
+	                					% endif
+	                				</div>
+                				% endif
+               				</div>
+           				% endif
+                	</div><br/>
                 ]]>
             </field>
         </record>
